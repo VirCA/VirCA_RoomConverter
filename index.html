@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Scene and SCFG to ROOM converter</title>
+</head>
+<body>
+    <p><font size="8" color="gray"> Scene and SCFG to ROOM converter </font></p>
+    <form id="upload" enctype="multipart/form-data" action="/upload" method="post" >
+        <p>Your room name:</p>
+        <input type="text" name="roomName" /><br>
+        <p>Version number:</p>
+        <input type="number" name="version" min="1" max="100"/> <br>
+        <p>Upload .scene file: </p>
+        <input type="file" name="file1" size="30"/><br>
+        <p>Upload .scfg file: </p>
+        <input type="file" name="file2" size="30"/><br><br>
+        <label><input type="checkbox" name="multiply" />Scales x 100</label><br><br>
+        
+        <input type="submit" value="Submit" />
+         
+    </form>
+</body>
+</html>
