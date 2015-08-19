@@ -1,6 +1,6 @@
-exports.scfgJSON2room = function(filename) {		
+exports.scfgJSON2room = function(filename, objectName, roomName) {		
 	var jsonfile = require('jsonfile');
-    var fromJSON = jsonfile.readFileSync("object2.json");
+    var fromJSON = jsonfile.readFileSync("./" +objectName);
 	var js2xml = require('js2xmlparser');
 	var fs = require('fs');
 
@@ -214,7 +214,6 @@ exports.scfgJSON2room = function(filename) {
 	}
 
 	str=str.replace(/<[^>]+><\/[^\/>]+>/gim, "");
-	//str=str.replace(/<[^>]+>false<\/[^\/>]+>/gim, "");
 	while(str.replace(/<[^\/>]+>[\s\t\n]+<\/[^>]+>/gim, "") != str){
 		str=str.replace(/<[^\/>]+>[\s\t\n]+<\/[^>]+>/gim, "");
 	}
@@ -225,10 +224,5 @@ exports.scfgJSON2room = function(filename) {
 
 	str=str.replace(/^\s*[\r\n]/gm, "");
 
-	fs.writeFileSync(filename+"2.room", str);/*, function(err){
-		if(err)
-			console.log("\nError while writing to the file.");
-		else
-			console.log("\nYour .room file has written succesfully!");
-	});*/
+	fs.writeFileSync("./"+roomName, str);
 }

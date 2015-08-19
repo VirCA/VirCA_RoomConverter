@@ -6,16 +6,22 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     var scfP = require("../Parser-scfg/scfgParser.js");
     var scfJ2r = require("../Parser-scfg/scfgJSON2room.js");
     
-    sceP.sceneParser(sceneFileName, multiply);
-    sceJ2R.sceneJSON2room(roomFilename);
+    var SCENEobjectName = Date.now() + "object1.json";
+    var SCFGobjectName = Date.now() + "object2.json";
     
-    scfP.scfgParser(scfgFileName);
-    scfJ2r.scfgJSON2room(roomFilename);
+    var SCENEroom = Date.now() + "scene.room";
+    var SCFGroom = Date.now() + "scfg.room";
+
+    sceP.sceneParser(sceneFileName, multiply, SCENEobjectName);
+    sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    
+    scfP.scfgParser(scfgFileName, SCFGobjectName);
+    scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom);
     
     var fs = require('fs');
     
-    var scene = fs.readFileSync("./" + roomFilename + "1.room").toString();
-    var scfg = fs.readFileSync("./" + roomFilename + "2.room").toString();
+    var scene = fs.readFileSync("./" + SCENEroom).toString();
+    var scfg = fs.readFileSync("./" + SCFGroom).toString();
     
     scene = scene.replace(/\n/gim, "\n\t");
     scene = "\t" + scene;
@@ -30,18 +36,32 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
         else {
             console.log("May the force be with you.");
         }
-        fs.unlink("./" + roomFilename + "1.room", function (err) {
+        fs.unlink("./" + SCENEroom, function (err) {
             if (!err)
-                console.log(roomFilename + "1.room : Deleted successfully");
+                console.log(SCENEroom + " : Deleted successfully");
         });
-        fs.unlink("./" + roomFilename + "2.room", function (err) {
+        fs.unlink("./" + SCFGroom, function (err) {
             if (!err)
-                console.log(roomFilename + "2.room : Deleted successfully");
+                console.log(SCFGroom + " : Deleted successfully");
         });
         fs.unlink("./" + roomFilename + ".room", function (err) {
             if (!err)
-                console.log(roomFilename + ".room : Deleted successfully");
+                console.log(roomFilename + " : Deleted successfully");
         });
+        fs.unlink("./" + SCENEobjectName, function (err) {
+            if (!err)
+                console.log(SCENEobjectName + " : Deleted successfully");
+        });
+        fs.unlink("./" + SCFGobjectName, function (err) {
+            if (!err)
+                console.log(SCFGobjectName + " : Deleted successfully");
+        });
+    
+    });
+    fs.writeFile("./uploads/rooms/"+Date.now() + roomFilename + ".room", room, function (err) {
+        if (!err) {
+            console.log("FILE SAVED: " + roomFilename);
+        }
     });
 }
 

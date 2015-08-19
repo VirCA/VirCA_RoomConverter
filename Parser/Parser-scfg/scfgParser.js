@@ -1,6 +1,6 @@
 var fs = require("fs");
 var parsing = require("../Parser-scfg/xml2json.js");
-exports.scfgParser = function(filename) {
+exports.scfgParser = function(filename, objectName) {
 	
 	
     var fn = "./uploads/" + filename;
@@ -44,7 +44,7 @@ exports.scfgParser = function(filename) {
         settings.presentation = presentation(base);
     }
 	var jsfl = require('jsonfile');
-    jsfl.writeFileSync("object2.json", settings);
+    jsfl.writeFileSync(objectName, settings);
 
 }
 	function baseDetails(base){
@@ -126,8 +126,8 @@ exports.scfgParser = function(filename) {
 		light.skybox.distance = parsing.tagBase(sky_b, "distance");
 
 		var ambi_b = parsing.cutContentFromBegining(base, "<ambientcolor", "/>");
-   // console.log(ambi_b + "\n\n"+base);
-    //ambi_b = parsing.cutFrame(ambi_b, "<ambientcolor", "/>");
+        // console.log(ambi_b + "\n\n"+base);
+        //ambi_b = parsing.cutFrame(ambi_b, "<ambientcolor", "/>");
 
 		//console.log("teszt: "+ ambi_b);
 		light.ambientcolor.r = parsing.tagBase(ambi_b, "r");

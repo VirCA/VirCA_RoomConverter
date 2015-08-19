@@ -4,22 +4,115 @@
 <head>
     <meta charset="utf-8" />
     <title>Scene and SCFG to ROOM converter</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 <body>
-    <p><font size="8" color="gray"> Scene and SCFG to ROOM converter </font></p>
-    <form id="upload" enctype="multipart/form-data" action="/upload" method="post" >
-        <p>Your room name:</p>
-        <input type="text" name="roomName" /><br>
-        <p>Version number:</p>
-        <input type="number" name="version" min="1" max="100"/> <br>
-        <p>Upload .scene file: </p>
-        <input type="file" name="file1" size="30"/><br>
-        <p>Upload .scfg file: </p>
-        <input type="file" name="file2" size="30"/><br><br>
-        <label><input type="checkbox" name="multiply" />Scales x 100</label><br><br>
+    <p><font size="8" color="white"> Scene and SCFG to ROOM converter </font></p>
+    <form class="form-inline" id="upload" enctype="multipart/form-data" action="/upload" method="post" >
         
-        <input type="submit" value="Submit" />
-         
-    </form>
+        <div class="form-group">
+            <label for="focusedInput">Your room name:</label><br>
+            <input class="form-control" id="focusedInput" type="text" name="roomName">
+        </div><br><br>
+        <div class="form-group">
+            <label for="focusedInput">Version number:</label><br>
+            <input class="form-control" id="focusedInput" type="number" name="version" min="1" max="100">
+        </div><br><br>  
+        <div class="col-lg-6 col-sm-6 col-12 form-files">
+            <label> Upload your scene and scfg files:</label>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse&hellip; <input type="file" name="file" multiple>
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div><br><br>
+            <div class="form-checkbox">
+                <label for="focusedInput">Scales x 100</label>
+                <input id="focusedInput" type="checkbox" name="multiply">
+            </div><br><br>
+
+            <input class="btn btn-primary btn-lg smmt" type="submit" value="Submit" />
+
+</form>
+    <style>
+        p{
+            margin-top: 40px;
+            margin-left: 40px;
+            background-color: #007AA3;
+            color: white;
+        }
+        form{
+            margin-top: 70px;   
+        }
+        div.form-group{
+            margin-left: 220px;
+        }
+        input.smmt{
+            margin-left: 110px;
+            background-color: #007AA3;
+        }
+        input.form-checkbox{
+            margin-left:unset;
+        }
+        div.form-files{
+            margin-left: 205px;
+        }
+        .btn-file {
+          position: relative;
+          overflow: hidden;
+          background-color: #007AA3;
+        }
+        .btn-file input[type=file] {
+           
+          position: absolute;
+          top: 0;
+          right: 0;
+          min-width: 100%;
+          min-height: 100%;
+          font-size: 100px;
+          text-align: right;
+          filter: alpha(opacity=0);
+          opacity: 0;
+          background: red;
+          cursor: inherit;
+          display: block;
+        }
+        input[readonly] {
+          background-color: white !important;
+          cursor: text !important;
+        }
+        </style>
+    <script type="text/javascript">
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
-exports.sceneJSON2room = function(filename){
+exports.sceneJSON2room = function(filename, objectName, roomName){
 
 	var jsonfile = require('jsonfile');
 
-		var fromJSON = jsonfile.readFileSync("./object1.json");
+		var fromJSON = jsonfile.readFileSync("./" + objectName);
 
 		var js2xml = require('js2xmlparser');
 
@@ -407,7 +407,7 @@ exports.sceneJSON2room = function(filename){
 					if(fromJSON[i].lightAttenuation.quadratic == undefined)
 						node.light.type.point.attenuation.manual.quadratic = 0;
             }
-            console.log("XYZW : " + node.pose.orientation.quaternion.x + " " + node.pose.orientation.quaternion.y + " " + node.pose.orientation.quaternion.z + " " + node.pose.orientation.quaternion.w);
+           // console.log("XYZW : " + node.pose.orientation.quaternion.x + " " + node.pose.orientation.quaternion.y + " " + node.pose.orientation.quaternion.z + " " + node.pose.orientation.quaternion.w);
                 
         }
        
@@ -440,7 +440,7 @@ exports.sceneJSON2room = function(filename){
 
 
 
-		fs.writeFileSync(filename+"1.room", str); /*, function(err){
+		fs.writeFileSync("./" +roomName, str); /*, function(err){
 			if(err)
 				console.log("\nError while writing to the file.");
 			else

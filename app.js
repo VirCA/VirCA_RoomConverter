@@ -35,64 +35,53 @@ server.route([{
                 roomFN = request.payload.roomName;
                 version = request.payload.version;
                 multiply = request.payload.multiply;
-
                 pathROOM = roomFN + '.room';
-                
-                if (request.payload.file1 === undefined) {
-                    reply("Not selected scene file.");
+                var file = request.payload.file;
+                //console.log("Files:\n" + request.payload.file.length);
+                // Maxfáljméretet még biztosítani kell!!
+                if (file == undefined) {
+                    reply("ERROR: No selected file.");
+                    return;
                 }
-                if (request.payload.file2 === undefined) {
-                    reply("Not selected scfg file.");
+                else if (file.length == undefined && file.hapi.filename.indexOf(".scene") == -1) {
+                    reply("ERROR: There is no scene file selected.");
+                    return;
                 }
-                if (request.payload.file1 != undefined) {
-                    var body = '';
-                    request.payload.file1.on('data', function (data) {
-                        body += data;
-                    });
-                    request.payload.file1.on('end', function () {
-                        result[0] = {
-                            description: request.payload.description,
-                            file: {
-                                data: body,
-                                filename: request.payload.file1.hapi.filename,
-                                headers: request.payload.file1.hapi.headers
-                            }
-                        };
-                        console.log("SUCCESS: The following file has parsed.: " + result[0].file.filename);
-                        
-                        fileNScene = Date.now() + result[0].file.filename;
-                        var fileCreater1 = fs.writeFileSync("./uploads/" + fileNScene, result[0].file.data);
-                    });
+                else if (file.length == undefined && file.hapi.filename.indexOf(".scene") >= 0) {
+                    console.log("SUCCESS: One scene file has been uploaded, without scfg.");
+                    var SCENE_file_name = Date.now() + file.hapi.filename;
+                    fs.writeFileSync("./uploads/"+SCENE_file_name, file._data);
+                    parser(SCENE_file_name, SCENE_file_name, roomFN, version, multiply);
+                    reply.file(roomFN + ".room").header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
                 }
-                
-                if (request.payload.file2 != undefined) {
-                    var body = '';
-                    request.payload.file2.on('data', function (data) {
-                        body += data;
-                    });
-                    request.payload.file2.on('end', function () {
-                        result[1] = {
-                            description: request.payload.description,
-                            file: {
-                                data: body,
-                                filename: request.payload.file2.hapi.filename,
-                                headers: request.payload.file2.hapi.headers
-                            }
-                        };
-                        console.log("SUCCESS: The following file has parsed.: " + result[1].file.filename);
-                        
-                        fileNScfg = Date.now() + result[1].file.filename;
-                        var fileCreater2 = fs.writeFileSync("./uploads/" + fileNScfg, result[1].file.data);
-                        
-                        if (fileNScene != "" && fileNScfg != "") {
-                            parser(fileNScene, fileNScfg, roomFN, version, multiply);
-                            reply.file(roomFN + ".room").header("Content-Disposition", "attachment; filename=" + roomFN+".room");
-                            //reply("Convertation was successful.<br>Click here to download your file:  <form id=\"download\" enctype=\"multipart/form-data\" action=\"\download\" method=\"post\" >\n<input type=\"submit\" name=\"Download\" /><br>");
-                        }
-                    });
+                else if (file.length == 2) {
+                    var SCENE_file_name = "";
+                    var SCFG_file_name = "";
+                    if (file[0].hapi.filename.indexOf(".scene") >= 0 && file[1].hapi.filename.indexOf(".scfg") >= 0) {
+                        SCENE_file_name =Date.now() +file[0].hapi.filename;
+                        SCFG_file_name = Date.now() + file[1].hapi.filename;
+                        fs.writeFileSync("./uploads/" + SCENE_file_name, file[0]._data);
+                        fs.writeFileSync("./uploads/" + SCFG_file_name, file[1]._data);
+                    }
+                    else if (file[1].hapi.filename.indexOf(".scene") >= 0 && file[0].hapi.filename.indexOf(".scfg") >= 0) {
+                        SCENE_file_name = Date.now() + file[1].hapi.filename;
+                        SCFG_file_name = Date.now() + file[0].hapi.filename;
+                        fs.writeFileSync("./uploads/" + SCENE_file_name, file[1]._data);
+                        fs.writeFileSync("./uploads/" + SCFG_file_name, file[0]._data);
+                    }
+                    else {
+                        reply("ERROR: Wrong file extensions.")
+                        return;
+                    }
+                    console.log("SUCCESS: Scene and scfg file has been uploaded.");
+                    
+                    parser(SCENE_file_name, SCFG_file_name, roomFN, version, multiply);
+                    reply.file(roomFN + ".room").header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
                 }
-            
-           
+                else {
+                    reply("ERROR: You selected more than two file, or the extensions were wrong.");
+                    return;
+                }                       
             },
             payload: {
                 output: 'stream',

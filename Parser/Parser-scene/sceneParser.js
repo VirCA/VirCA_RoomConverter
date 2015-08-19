@@ -1,7 +1,7 @@
 var fs = require("fs");
 var jsfl = require('jsonfile');
 
-exports.sceneParser = function (filename, multiply){
+exports.sceneParser = function (filename, multiply, objectName){
     var scene = readFromFile(filename);
     //console.log(scene);
 
@@ -17,7 +17,7 @@ exports.sceneParser = function (filename, multiply){
         ++i;
 		scene = removeNode(scene);
 	}
-		jsfl.writeFileSync("./object1.json", nodes);
+		jsfl.writeFileSync(objectName, nodes);
 }
 
 function nodeMultiplier(node){
