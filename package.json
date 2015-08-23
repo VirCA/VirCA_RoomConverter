@@ -1,9 +1,13 @@
 {
-  "name": "virca",
-  "version": "1.0.0",
-  "description": "Virca",
+  "name": "vircaRoomConverter",
+  "version": "1.0.4",
+  "description": "A webapp to convert old VirCA .scene and .scfg files to .room",
   "main": "app.js",
-  "author": "Ádám",
+  "author": "Ádám Pintér <piadba@gmail.com>",
+  "contributors": [{
+  "name": "Péter Galambos",
+  "email": "galambos@mistems.hu"
+}],
   "dependencies": {
     "hapi": "^9.0.0",
     "js2xmlparser": "^1.0.0",
@@ -14,15 +18,15 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node app.js"
+    "start": "node app.js"
   },
   "keywords": [
-    "scfg",
-    "and",
+    "virca",
+    "room",
     "scene",
-    "to",
     "room",
     "converter"
   ],
-  "license": "ISC"
+  
+  "license": "MIT"
 }

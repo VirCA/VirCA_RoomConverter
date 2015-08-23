@@ -11,9 +11,12 @@ var fileNScene = "", fileNScfg = "";
 var roomDOWNable = undefined;
 var inert = require('inert');
 
+var host = process.env.VCAP_APP_HOST || 'localhost';
+var port = process.env.VCAP_APP_PORT || 8080
+
 server.connection({
-    port: Number(process.argv[2] || 8080),
-    host: 'localhost'
+    port: port,
+    host: host
 });
 
 server.register(inert, function () { });
@@ -94,5 +97,5 @@ server.route([{
 
 
 server.start(function () {
-    console.log("Server has started...");
+    console.log('Server running at http://' + host + ':' + port + '/');
 });
