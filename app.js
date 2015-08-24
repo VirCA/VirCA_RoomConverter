@@ -61,7 +61,7 @@ server.route([{
                     var SCENE_file_name = "";
                     var SCFG_file_name = "";
                     if (file[0].hapi.filename.indexOf(".scene") >= 0 && file[1].hapi.filename.indexOf(".scfg") >= 0) {
-                        SCENE_file_name =Date.now() +file[0].hapi.filename;
+                        SCENE_file_name = Date.now() +file[0].hapi.filename;
                         SCFG_file_name = Date.now() + file[1].hapi.filename;
                         fs.writeFileSync("./uploads/" + SCENE_file_name, file[0]._data);
                         fs.writeFileSync("./uploads/" + SCFG_file_name, file[1]._data);
@@ -78,8 +78,8 @@ server.route([{
                     }
                     console.log("SUCCESS: Scene and scfg file has been uploaded.");
                     
-                    parser(SCENE_file_name, SCFG_file_name, roomFN, version, multiply);
-                    reply.file(roomFN + ".room").header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
+                    var roomPath = parser(SCENE_file_name, SCFG_file_name, roomFN, version, multiply);
+                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
                 }
                 else {
                     reply("ERROR: You selected more than two file, or the extensions were wrong.");
@@ -97,5 +97,5 @@ server.route([{
 
 
 server.start(function () {
-    console.log('Server running at http://' + host + ':' + port + '/');
+    console.log("Server has started...");
 });
