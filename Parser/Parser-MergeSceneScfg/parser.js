@@ -29,40 +29,28 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     scfg = "\t" + scfg;
     var room = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<room name=\"" + roomFilename + "\" version=\"" + version + "\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" + scfg + "\n" + scene + "\n</room>";
     room = room.replace(/,/gim, ".");
-    fs.writeFile(roomFilename + ".room", room, function (err) {
-        if (err) {
-            console.log("ERROR: FINAL");
-        }
-        else {
-            console.log("May the force be with you.");
-        }
-        fs.unlink("./" + SCENEroom, function (err) {
-            if (!err)
-                console.log(SCENEroom + " : Deleted successfully");
-        });
-        fs.unlink("./" + SCFGroom, function (err) {
-            if (!err)
-                console.log(SCFGroom + " : Deleted successfully");
-        });
-        fs.unlink("./" + roomFilename + ".room", function (err) {
-            if (!err)
-                console.log(roomFilename + " : Deleted successfully");
-        });
-        fs.unlink("./" + SCENEobjectName, function (err) {
-            if (!err)
-                console.log(SCENEobjectName + " : Deleted successfully");
-        });
-        fs.unlink("./" + SCFGobjectName, function (err) {
-            if (!err)
-                console.log(SCFGobjectName + " : Deleted successfully");
-        });
-    
+
+    //fs.writeFileSync(roomFilename + ".room", room);
+    var roomPath = "./uploads/rooms/" + Date.now() + roomFilename + ".room";
+    fs.writeFileSync(roomPath, room);
+
+    fs.unlink("./" + SCENEroom, function (err) {
+        if (!err)
+            console.log(SCENEroom + " : Deleted successfully");
     });
-    fs.writeFile("./uploads/rooms/"+Date.now() + roomFilename + ".room", room, function (err) {
-        if (!err) {
-            console.log("FILE SAVED: " + roomFilename);
-        }
+    fs.unlink("./" + SCFGroom, function (err) {
+        if (!err)
+            console.log(SCFGroom + " : Deleted successfully");
     });
+    fs.unlink("./" + SCENEobjectName, function (err) {
+        if (!err)
+            console.log(SCENEobjectName + " : Deleted successfully");
+    });
+    fs.unlink("./" + SCFGobjectName, function (err) {
+        if (!err)
+            console.log(SCFGobjectName + " : Deleted successfully");
+    });
+    return roomPath;
 }
 
 
