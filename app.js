@@ -39,6 +39,7 @@ server.route([{
                 version = request.payload.version;
                 multiply = request.payload.multiply;
                 pathROOM = roomFN + '.room';
+
                 var file = request.payload.file;
                 //console.log("Files:\n" + request.payload.file.length);
                 // Maxfáljméretet még biztosítani kell!!
@@ -98,4 +99,15 @@ server.route([{
 
 server.start(function () {
     console.log("Server has started...");
+    if (!fs.existsSync("./uploads")) {
+        fs.mkdirSync("./uploads");
+        fs.mkdirSync("./uploads/rooms");
+        
+        console.log("\'uploads\' directiory created.");
+        console.log("\'rooms\' directiory created.");
+    }
+    else if (!fs.existsSync("./uploads/rooms")) {
+        fs.mkdirSync("./uploads/rooms");
+        console.log("\'rooms\' directiory created.");
+    }
 });
