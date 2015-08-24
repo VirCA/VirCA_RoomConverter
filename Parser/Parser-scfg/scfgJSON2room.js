@@ -153,9 +153,9 @@ exports.scfgJSON2room = function(filename, objectName, roomName) {
             settings.environment.fog.color.g = fromJSON.light.fog.color.g;
             settings.environment.fog.color.b = fromJSON.light.fog.color.b;
             settings.environment.fog.color.a = fromJSON.light.fog.color.a;
-            settings.environment.fog.linearStart = fromJSON.light.linearStart;
-            settings.environment.fog.linearStop = fromJSON.light.linearStop;
-            settings.environment.fog.expDensity = fromJSON.light.expDensity;
+            settings.environment.fog.linearStart = fromJSON.light.fog.linearStart;
+            settings.environment.fog.linearStop = fromJSON.light.fog.linearStop;
+            settings.environment.fog.expDensity = fromJSON.light.fog.expDensity;
         }
         
         settings.pointer.visibility = !fromJSON.pointer.hidden;
