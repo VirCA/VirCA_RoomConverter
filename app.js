@@ -35,8 +35,8 @@ server.route([{
         path: '/upload',
         config: {
             handler: function (request, reply) {
-                roomFN = request.payload.roomName;
-                version = request.payload.version;
+                
+                version = "1.0";
                 multiply = request.payload.multiply;
                 pathROOM = roomFN + '.room';
 
@@ -54,9 +54,10 @@ server.route([{
                 else if (file.length == undefined && file.hapi.filename.indexOf(".scene") >= 0) {
                     console.log("SUCCESS: One scene file has been uploaded, without scfg.");
                     var SCENE_file_name = Date.now() + file.hapi.filename;
+                    roomFN = SCENE_file_name.substring(0, SCENE_file_name.indexOf("."));
                     fs.writeFileSync("./uploads/"+SCENE_file_name, file._data);
-                    parser(SCENE_file_name, SCENE_file_name, roomFN, version, multiply);
-                    reply.file(roomFN + ".room").header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
+                    var roomPath = parser(SCENE_file_name, SCENE_file_name, roomFN, version, multiply);
+                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
                 }
                 else if (file.length == 2) {
                     var SCENE_file_name = "";
@@ -64,12 +65,14 @@ server.route([{
                     if (file[0].hapi.filename.indexOf(".scene") >= 0 && file[1].hapi.filename.indexOf(".scfg") >= 0) {
                         SCENE_file_name = Date.now() +file[0].hapi.filename;
                         SCFG_file_name = Date.now() + file[1].hapi.filename;
+                        roomFN = SCENE_file_name.substring(0, SCENE_file_name.indexOf("."));
                         fs.writeFileSync("./uploads/" + SCENE_file_name, file[0]._data);
                         fs.writeFileSync("./uploads/" + SCFG_file_name, file[1]._data);
                     }
                     else if (file[1].hapi.filename.indexOf(".scene") >= 0 && file[0].hapi.filename.indexOf(".scfg") >= 0) {
                         SCENE_file_name = Date.now() + file[1].hapi.filename;
                         SCFG_file_name = Date.now() + file[0].hapi.filename;
+                        roomFN = SCENE_file_name.substring(0, SCENE_file_name.indexOf("."));
                         fs.writeFileSync("./uploads/" + SCENE_file_name, file[1]._data);
                         fs.writeFileSync("./uploads/" + SCFG_file_name, file[0]._data);
                     }

@@ -31,7 +31,7 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     room = room.replace(/,/gim, ".");
 
     //fs.writeFileSync(roomFilename + ".room", room);
-    var roomPath = "./uploads/rooms/" + Date.now() + roomFilename + ".room";
+    var roomPath = "./uploads/rooms/" + roomFilename + ".room";
     fs.writeFileSync(roomPath, room);
 
     fs.unlink("./" + SCENEroom, function (err) {
