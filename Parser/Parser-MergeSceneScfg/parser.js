@@ -1,4 +1,5 @@
-module.exports = function (sceneFileName, scfgFileName, roomFilename, version, multiply) {
+module.exports = function (sceneFileName, scfgFileName, roomFilename, version, easyOgreExport) {
+    //If feltétellel vizsgáljuk, hogy parszolni, konvertálni vagy mindekettõt szeretnénk csinálni
     var version = (version || "1.0");
     var sceP = require("../Parser-scene/sceneParser.js");
     var sceJ2R = require("../Parser-scene/sceneJSON2room.js");
@@ -12,11 +13,11 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     var SCENEroom = Date.now() + "scene.room";
     var SCFGroom = Date.now() + "scfg.room";
 
-    sceP.sceneParser(sceneFileName, multiply, SCENEobjectName);
+    sceP.sceneParser(sceneFileName, easyOgreExport, SCENEobjectName);
     sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
     
-    scfP.scfgParser(scfgFileName, SCFGobjectName);
-    scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom);
+    scfP.scfgParser(scfgFileName, SCFGobjectName, easyOgreExport);
+    scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
     
     var fs = require('fs');
     
@@ -31,7 +32,7 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     room = room.replace(/,/gim, ".");
 
     //fs.writeFileSync(roomFilename + ".room", room);
-    var roomPath = "./uploads/rooms/" + roomFilename + ".room";
+    var roomPath = "./uploads/rooms/" + Date.now() + roomFilename + ".room";
     fs.writeFileSync(roomPath, room);
 
     fs.unlink("./" + SCENEroom, function (err) {
@@ -52,7 +53,3 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, m
     });
     return roomPath;
 }
-
-
-
-//<room name=\""+process.argv[3]+"\" version=\""+process.argv[4]+"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"

@@ -302,9 +302,9 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
 
-				if(fromJSON[i].figure.width.indexOf(".") >=0)
+				if(fromJSON[i].figure.width.toString().indexOf(".") >=0)
 					fromJSON[i].figure.width = fromJSON[i].figure.width.substring(0, fromJSON[i].figure.width.indexOf("."));
-				if(fromJSON[i].figure.height.indexOf(".") >=0)
+				if(fromJSON[i].figure.height.toString().indexOf(".") >=0)
 					fromJSON[i].figure.height = fromJSON[i].figure.height.substring(0, fromJSON[i].figure.height.indexOf("."));
 
 				node.figure.width = fromJSON[i].figure.width;
@@ -376,7 +376,13 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 					node.light.type.spot.direction.x = fromJSON[i].direction.x;
 					node.light.type.spot.direction.y = fromJSON[i].direction.y;
-					node.light.type.spot.direction.z = fromJSON[i].direction.z;
+                    node.light.type.spot.direction.z = fromJSON[i].direction.z;
+
+                    if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y || fromJSON[i].direction.z) {
+                        node.light.type.spot.direction.x = 0;
+                        node.light.type.spot.direction.y = 0;
+                        node.light.type.spot.direction.z = 0;
+                    }
 				}
 				else if(fromJSON[i].type == "directional"){
 					node.light.type.directional.direction.x = fromJSON[i].direction.x;

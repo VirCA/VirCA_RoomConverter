@@ -1,127 +1,11 @@
-exports.scfgJSON2room = function(filename, objectName, roomName) {		
+exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport) {		
 	var jsonfile = require('jsonfile');
     var fromJSON = jsonfile.readFileSync("./" +objectName);
 	var js2xml = require('js2xmlparser');
 	var fs = require('fs');
 
-	var settings = {
-		environment: {
-			skybox: {
-				materialName: undefined,
-				distance: undefined
-			},
-			ambientColor: {
-				r: undefined,
-				g: undefined,
-				b: undefined,
-				a: undefined
-			},
-			backgroundColor: {
-				r: 0,
-				g: 0,
-				b: 0,
-				a: 1
-			},
-			runtimeshadersystem: undefined,
-			shadow: undefined,
-			compositors: {
-				Bloom: undefined,
-				MotionBlur: undefined
-			},
-			fog: {
-				type: undefined,
-				color: {
-					r: undefined,
-					g: undefined,
-					b: undefined,
-					a: undefined
-				},
-				linearStart: undefined,
-				linearStop: undefined,
-				expDensity: undefined
-			}
-		},
-		pointer:{
-			visibility: undefined,
-			crosshairs: undefined,
-			length: undefined,
-			offset: {
-				x: undefined,
-				y: undefined,
-				z: undefined
-			}
-		},
-		boundaries: {
-			xlimit: {
-				min: undefined,
-				max: undefined
-			},
-			ylimit: {
-				min: undefined,
-				max: undefined
-			},
-			zlimit: {
-				min: undefined,
-				max: undefined
-			}
-		},
-		camera: {
-			pose: {
-				position: {
-					x: undefined,
-					y: undefined,
-					z: undefined
-				},
-				orientation:{
-					ypr: {
-						yaw: undefined,
-						pitch: undefined,
-						roll: undefined
-					},
-					angleAxis: {
-						angle: undefined,
-						axis:{
-							x: undefined,
-							y: undefined,
-							z: undefined	
-						},
-					},
-					quaternion:{
-						x: undefined,
-						y: undefined,
-						z: undefined,
-						w: undefined
-					},
-					rotMatrix: {
-						xx: undefined,
-						xy: undefined,
-						xz: undefined,
-						yx: undefined,
-						yy: undefined,
-						yz: undefined,
-						zx: undefined,
-						zy: undefined,
-						zz: undefined
-					}
-
-				},
-			},
-			clipping: {
-				near: undefined,
-				far: undefined
-			},
-			fov: undefined
-		},
-		browserStartPage: {
-			url: undefined
-		},
-		presentation: {
-			fileName: undefined,
-			enabled: undefined
-		}
-    };
-    
-    if (fromJSON.type == 'scfg') {
+    var settings = require("./settingsObject.js");    
+    if (easyOgreExport == undefined) {
         if (fromJSON.light.skybox.materialName != undefined)
             settings.environment.skybox.materialName = fromJSON.light.skybox.materialName;
         if (fromJSON.light.skybox.distance != undefined)
@@ -157,8 +41,12 @@ exports.scfgJSON2room = function(filename, objectName, roomName) {
             settings.environment.fog.linearStop = fromJSON.light.fog.linearStop;
             settings.environment.fog.expDensity = fromJSON.light.fog.expDensity;
         }
-        
-        settings.pointer.visibility = !fromJSON.pointer.hidden;
+        if (fromJSON.pointer.hidden == "true") {
+            settings.pointer.visibility = "true";
+        }
+        else if (fromJSON.pointer.hidden == "false") {
+            settings.pointer.visibility = "false";
+        }
         settings.pointer.crosshairs = fromJSON.light.crosshairs.enable;
         settings.pointer.length = fromJSON.pointer.length;
         settings.pointer.offset.x = fromJSON.pointer.origin.x;
@@ -190,20 +78,12 @@ exports.scfgJSON2room = function(filename, objectName, roomName) {
         settings.presentation.fileName = fromJSON.presentation.xml;
         settings.presentation.enabled = fromJSON.presentation.use;
     }
-    else if(fromJSON.type == 'environment') {
-        settings.environment.ambientColor.r = fromJSON.ambientcolor.r;
-        settings.environment.ambientColor.g = fromJSON.ambientcolor.g;
-        settings.environment.ambientColor.b = fromJSON.ambientcolor.b;
-        settings.environment.ambientColor.a = fromJSON.ambientcolor.a;
-        if (settings.environment.ambientColor.a == undefined && settings.environment.ambientColor.b != undefined && settings.environment.ambientColor.g != undefined && settings.environment.ambientColor.r != undefined) {
-            settings.environment.ambientColor.a = 1;
-        }
-        
-        settings.environment.backgroundColor.r = fromJSON.colourBackground.r;
-        settings.environment.backgroundColor.g = fromJSON.colourBackground.g;
-        settings.environment.backgroundColor.b = fromJSON.colourBackground.b;
-
+    else if(easyOgreExport == "on"){
+        settings = fromJSON;
     }
+    var jsfl = require('jsonfile');
+    jsfl.writeFileSync("./uploads/settings/"+filename+".json", settings);
+
 	var str = js2xml("settings", settings);
 
 	while(str.indexOf("<Bloom/>") >= 0){

@@ -1,0 +1,40 @@
+﻿ #plane{
+    margin-top: 2%;
+    margin-left: 30%; 
+}
+#dNd-buttons {
+    margin-left: 42px;
+}
+.dropzone {
+    width: 500px;
+    height: 300px;
+    border: 2px dashed #ccc;
+    color: #ccc;
+    line-height: 300px;
+    text-align: center;
+}
+.dropzone.dragover {
+    border-color: #000;
+    color: #000;
+}
+p {
+    
+    background-color: #007AA3;
+    color: white;
+    width: 500px;
+}
+.uplNEW {
+    width: 140px;
+    height: 140px;
+    border: 1px;
+    text-decoration-style: double;
+    background-color: #007AA3;
+    text-align: center;
+    display: inline-block;
+    margin-top: 70px;
+
+}
+#txt1{
+    width: 140px;
+    height: 140px;
+}

@@ -1,7 +1,7 @@
 var fs = require("fs");
 var jsfl = require('jsonfile');
 
-exports.sceneParser = function (filename, multiply, objectName){
+exports.sceneParser = function (filename, easyOgreExport, objectName){
     var scene = readFromFile(filename);
     //console.log(scene);
 
@@ -12,7 +12,7 @@ exports.sceneParser = function (filename, multiply, objectName){
 		nodes.push(
 			parseOneNode(scene)
         );
-        if (multiply == "on")
+        if (easyOgreExport == "on")
             nodeMultiplier(nodes[i]);
         ++i;
 		scene = removeNode(scene);
@@ -32,6 +32,9 @@ function nodeMultiplier(node){
     }
     else if (node.mainType == "light" ) {
         node.position = scaleMulti(node.position);
+        node.lightAttenuation.range *= 100;
+        node.lightRange.inner *= 180 / Math.PI;
+        node.lightRange.outer *= 180 / Math.PI;
     }
     else if (node.mainType == "plane") {
         node.plane.width = wh_multi(node.plane.width);
@@ -149,10 +152,10 @@ function wh_multi(tmp){
         node.browser.isDraggable = "false";
         node.browser.isSnap2Wall = "true";
         var tmp = node.detail.name;
-        if (tmp.indexOf("_w:") >= 0 && tmp.indexOf("_h:") >= 0) {
-            node.browser.width = tmp.substring(tmp.indexOf("_w:")+3, tmp.indexOf("_h:"));// ideiglenes
-            node.browser.height = tmp.substring(tmp.indexOf("_h:")+3);
-            node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + tmp.substring(tmp.indexOf("_brw_") + 5, tmp.indexOf("_w:"));
+        if (tmp.indexOf("_w_") >= 0 && tmp.indexOf("_h_") >= 0) {
+            node.browser.width = tmp.substring(tmp.indexOf("_w_")+3, tmp.indexOf("_h_"));// ideiglenes
+            node.browser.height = tmp.substring(tmp.indexOf("_h_")+3);
+            node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + tmp.substring(tmp.indexOf("_brw_") + 5, tmp.indexOf("_w_"));
             node.browser.zoom = 0;
         }
         else {
