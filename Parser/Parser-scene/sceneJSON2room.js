@@ -73,6 +73,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 					"snappedToWall": undefined,
 					"width": undefined,
 					"height": undefined,
+					"resH": undefined,
+					"resV": undefined,
 					"zoom": undefined
 				},
 				"figure":{
@@ -284,6 +286,12 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 				node.browser.width = fromJSON[i].browser.width;
 				node.browser.height = fromJSON[i].browser.height;
+
+				if(fromJSON[i].browser.resolution_w != undefined)
+				{
+					node.browser.resV = fromJSON[i].browser.resolution_h;
+					node.browser.resH = fromJSON[i].browser.resolution_w;
+				}
 				node.browser.zoom = fromJSON[i].browser.zoom;
 			}
 			else if(fromJSON[i].mainType == "figure"){
