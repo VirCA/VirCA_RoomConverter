@@ -276,13 +276,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.browser.shared = fromJSON[i].browser.isShared;
 				node.browser.draggable = fromJSON[i].browser.isDraggable;
 				node.browser.snappedToWall = fromJSON[i].browser.isSnap2Wall;
-				var temp = fromJSON[i].browser.width;
-				if(temp.toString().indexOf(".") >=0)
-					fromJSON[i].browser.width = fromJSON[i].browser.width.substring(0, fromJSON[i].browser.width.indexOf("."));
-				if(fromJSON[i].browser.height.toString().indexOf(".") >=0)
-					fromJSON[i].browser.height = fromJSON[i].browser.height.substring(0, fromJSON[i].browser.height.indexOf("."));
-				if(fromJSON[i].browser.zoom.toString().indexOf(".") >=0)
-					fromJSON[i].browser.zoom = fromJSON[i].browser.zoom.substring(0, fromJSON[i].browser.zoom.indexOf("."));
+				
 
 				node.browser.width = fromJSON[i].browser.width;
 				node.browser.height = fromJSON[i].browser.height;
