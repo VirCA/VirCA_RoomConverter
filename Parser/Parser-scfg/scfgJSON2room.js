@@ -73,7 +73,7 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         
         settings.camera.fov = fromJSON.camera.fov;
         
-        settings.browserStartPage.url = fromJSON.browser.url;
+        settings.browserStartPage.url = fromJSON.browser.homepage.url;
         
         settings.presentation.fileName = fromJSON.presentation.xml;
         settings.presentation.enabled = fromJSON.presentation.use;

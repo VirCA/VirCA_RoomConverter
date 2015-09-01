@@ -383,7 +383,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
                     if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y || fromJSON[i].direction.z) {
                         node.light.type.spot.direction.x = 0;
                         node.light.type.spot.direction.y = 0;
-                        node.light.type.spot.direction.z = 0;
+                        node.light.type.spot.direction.z = 1;
                     }
 				}
 				else if(fromJSON[i].type == "directional"){
@@ -393,7 +393,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
                     if (node.light.type.directional.direction.x== undefined || node.light.type.directional.direction.y == undefined || node.light.type.directional.direction.z == undefined) {
                         node.light.type.directional.direction.x = 0;
                         node.light.type.directional.direction.y = 0;
-                        node.light.type.directional.direction.z = 0;
+                        node.light.type.directional.direction.z = 1;
                     }
 				}
 				else if(fromJSON[i].type == "point"){
