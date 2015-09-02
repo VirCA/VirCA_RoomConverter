@@ -229,13 +229,13 @@
                                     <div class="fifth">
                                         <div id="camera_quaternion">
                                             <label>x: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_x"><br>
+                                            <input class="nums" type="number" id="camera_pose_orientation_qx"><br>
                                             <label>y: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_y"><br>
+                                            <input class="nums" type="number" id="camera_pose_orientation_qy"><br>
                                             <label>z: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_z"><br>
+                                            <input class="nums" type="number" id="camera_pose_orientation_qz"><br>
                                             <label>w: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_w"><br> 
+                                            <input class="nums" type="number" id="camera_pose_orientation_qw"><br> 
                                         </div>
                                         <div id="camera_angleAxis">
                                             <label>Angle: </label>
@@ -510,11 +510,14 @@
         $('#boundaries_yLimit_max').val(room.settings.boundaries.ylimit.max);
         $('#boundaries_zLimit_min').val(room.settings.boundaries.zlimit.min);
         $('#boundaries_zLimit_max').val(room.settings.boundaries.zlimit.max);
-        //-----------------boundaries----------------
+        //-----------------camera----------------
         $('#camera_pose_position_x').val(room.settings.camera.pose.position.x);
         $('#camera_pose_position_y').val(room.settings.camera.pose.position.y);
         $('#camera_pose_position_z').val(room.settings.camera.pose.position.z);
-        $('#camera_pose_position_z').val(room.settings.camera.pose.position.z);
+        $('#camera_pose_orientation_qx').val(room.settings.camera.pose.orientation.quaternion.x);
+        $('#camera_pose_orientation_qy').val(room.settings.camera.pose.orientation.quaternion.y);
+        $('#camera_pose_orientation_qz').val(room.settings.camera.pose.orientation.quaternion.z);
+        $('#camera_pose_orientation_qw').val(room.settings.camera.pose.orientation.quaternion.w);
         $('#camera_clipping_near').val(room.settings.camera.clipping.far);
         $('#camera_clipping_far').val(room.settings.camera.clipping.far);
         $('#camera_fov').val(room.settings.camera.fov);
@@ -543,9 +546,15 @@
     function GetSettingsObject() {
         room.roomName = $('#roomName').val();
         //-----------------environment----------------
-        room.settings.environment.skybox.materialName = $('#environment_skybox_materialName').val();
-        room.settings.environment.skybox.distance= $('#environment_skybox_distance').val();
-        
+        if (room.settings.environment.skybox != undefined) {
+            room.settings.environment.skybox.materialName = $('#environment_skybox_materialName').val();
+            room.settings.environment.skybox.distance = $('#environment_skybox_distance').val();
+        }
+        else {
+            room.settings.environment.skybox = {};
+            room.settings.environment.skybox.materialName = $('#environment_skybox_materialName').val();
+            room.settings.environment.skybox.distance = $('#environment_skybox_distance').val();
+        }
         room.settings.environment.ambientColor.r = $('#environment_ambientColor_r').val();
         room.settings.environment.ambientColor.g = $('#environment_ambientColor_g').val();
         room.settings.environment.ambientColor.b = $('#environment_ambientColor_b').val();
@@ -580,10 +589,14 @@
         room.settings.boundaries.ylimit.max= $('#boundaries_yLimit_max').val();
         room.settings.boundaries.zlimit.min = $('#boundaries_zLimit_min').val();
         room.settings.boundaries.zlimit.max=  $('#boundaries_zLimit_max').val();
-        //-----------------boundaries----------------
+        //-----------------camera----------------
         room.settings.camera.pose.position.x = $('#camera_pose_position_x').val();
         room.settings.camera.pose.position.y = $('#camera_pose_position_y').val();
-        room.settings.camera.pose.position.z =  $('#camera_pose_position_z').val();
+        room.settings.camera.pose.position.z = $('#camera_pose_position_z').val();
+        room.settings.camera.pose.orientation.quaternion.x = $('#camera_pose_orientation_qx').val();
+        room.settings.camera.pose.orientation.quaternion.y = $('#camera_pose_orientation_qy').val();
+        room.settings.camera.pose.orientation.quaternion.z = $('#camera_pose_orientation_qz').val();
+        room.settings.camera.pose.orientation.quaternion.w = $('#camera_pose_orientation_qw').val();
         room.settings.camera.clipping.far = $('#camera_clipping_near').val();
         room.settings.camera.clipping.far = $('#camera_clipping_far').val();
         room.settings.camera.fov = $('#camera_fov').val();
