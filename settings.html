@@ -603,8 +603,15 @@
         //-----------------browserStartPage----------------
         room.settings.browserStartPage.url = $('#browserStartPage_url').val();
         //-----------------presentation----------------
-        room.settings.presentation.fileName = $('#presentation_fileName').val();
-        room.settings.presentation.enabled = $('#presentation_enabled').val();
+        if (room.settings.presentation != undefined) {
+            room.settings.presentation.fileName = $('#presentation_fileName').val();
+            room.settings.presentation.enabled = $('#presentation_enabled').val();
+        }
+        else {
+            room.settings.presentation = {};
+            room.settings.presentation.fileName = $('#presentation_fileName').val();
+            room.settings.presentation.enabled = $('#presentation_enabled').val();
+        }
     }
 
     function download(filename, text) {
