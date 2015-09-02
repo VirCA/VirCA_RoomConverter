@@ -49,9 +49,7 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         }
         settings.pointer.crosshairs = fromJSON.light.crosshairs.enable;
         settings.pointer.length = fromJSON.pointer.length;
-        settings.pointer.offset.x = fromJSON.pointer.origin.x;
-        settings.pointer.offset.y = fromJSON.pointer.origin.y;
-        settings.pointer.offset.z = fromJSON.pointer.origin.z;
+        
         
         settings.boundaries.xlimit.min = fromJSON.physlimits.xlimit.min;
         settings.boundaries.xlimit.max = fromJSON.physlimits.xlimit.max;
@@ -63,6 +61,11 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         settings.camera.pose.position.x = fromJSON.camera.position.x;
         settings.camera.pose.position.y = fromJSON.camera.position.y;
         settings.camera.pose.position.z = fromJSON.camera.position.z;
+        //default better?
+        settings.pointer.offset.x = fromJSON.pointer.origin.x - settings.camera.pose.position.x;
+        settings.pointer.offset.y = fromJSON.pointer.origin.y - settings.camera.pose.position.y;
+        settings.pointer.offset.z = fromJSON.pointer.origin.z - settings.camera.pose.position.z;
+
         settings.camera.pose.orientation.quaternion.x = fromJSON.camera.rotation.x;
         settings.camera.pose.orientation.quaternion.y = fromJSON.camera.rotation.y;
         settings.camera.pose.orientation.quaternion.z = fromJSON.camera.rotation.z;
@@ -104,5 +107,6 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
 
 	str=str.replace(/^\s*[\r\n]/gm, "");
 
-	fs.writeFileSync("./"+roomName, str);
+    fs.writeFileSync("./" + roomName, str);
+    return settings;
 }

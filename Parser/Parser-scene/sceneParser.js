@@ -154,7 +154,9 @@ function wh_multi(tmp){
         var tmp = node.detail.name;
         if (tmp.indexOf("_w_") >= 0 && tmp.indexOf("_h_") >= 0) {
             node.browser.width = tmp.substring(tmp.indexOf("_w_")+3, tmp.indexOf("_h_"));// ideiglenes
-            node.browser.height = tmp.substring(tmp.indexOf("_h_")+3);
+            node.browser.height = tmp.substring(tmp.indexOf("_h_") + 3);
+            node.browser.resolution_w = tmp.substring(tmp.indexOf("_resH_") + 6, tmp.indexOf("_resV_"));
+            node.browser.resolution_h = tmp.substring(tmp.indexOf("_resV_") + 6);
             node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + tmp.substring(tmp.indexOf("_brw_") + 5, tmp.indexOf("_w_"));
             node.browser.zoom = 0;
         }

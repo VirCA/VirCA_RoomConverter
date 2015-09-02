@@ -30,9 +30,8 @@
             <label>If you used Easy Ogre Exporter:</label>
             <input id="scales" type="checkbox" name="easyOgreExport">
             <div id="dNd-buttons">
-                <button class="btn btn-primary btn-lg btn-disabled" id="submit">Submit</button>
+                <button class="btn btn-primary btn-lg btn-disabled" id="submit">Upload files</button>
                 <button class="btn btn-primary btn-lg" id="myButton">Remove selected file(s)</button>
-                <button class="btn btn-primary btn-lg" id="dwnl">Download</button>
             </div>
 </div>
 
@@ -45,11 +44,10 @@
         var rmv = document.getElementById("myButton");
         var files = undefined;
         var xhr = new XMLHttpRequest();
-        var dwnl = document.getElementById("dwnl");
-        dwnl.disabled = true;
         var roomName = "";
         var data = "";
         var easyOgreExport;
+        
 
         (function () {         
             var upload = function (files) {
@@ -73,7 +71,7 @@
                         xhr.onloadend = function () {
                             data = xhr.responseText;
                             console.log("Convertation done.");
-                            dwnl.disabled = false;
+                            window.open("/settings.html");
                         }
                         formData = undefined;
                        // console.log(xhr);
@@ -88,14 +86,10 @@
                     document.getElementById('dNdtext').textContent = "Drop scene and scfg files here.";
                     //console.log(files);
                     dropzone.className = 'dropzone';
-                    dwnl.disabled = true;
                     easyOgreExport = undefined;
                 };
             }
 
-            dwnl.onclick = function () {
-                download(roomName + ".room", data);
-            }
            
            
             dropzone.ondrop = function (e) {
@@ -136,31 +130,20 @@
         }());
 
         function getRoomName(files) {
+            
             if (files[0].name.indexOf(".scene") >= 0) {
                 return files[0].name.substring(0, files[0].name.indexOf(".scene"));
             }
-            else if (files[1].name.indexOf(".scene") >= 0) {
+            else if (files.length > 1 && files[1].name.indexOf(".scene") >= 0) {
                 return files[0].name.substring(0, files[0].name.indexOf(".scene"));
             }
+            return;
         }
         function populateIframe(id, path) {
             var ifrm = document.getElementById(id);
             ifrm.src = path;
         }
-        function download(filename, text) {
-            var pom = document.createElement('a');
-            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-            pom.setAttribute('download', filename);
-
-            if (document.createEvent) {
-                var event = document.createEvent('MouseEvents');
-                event.initEvent('click', true, true);
-                pom.dispatchEvent(event);
-            }
-            else {
-                pom.click();
-            }
-        }
+       
 
     </script>
 </body>

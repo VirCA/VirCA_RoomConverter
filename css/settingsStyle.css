@@ -1,0 +1,68 @@
+﻿
+    header{
+        margin-left: 100px;
+        margin-right: 165px;
+    }
+    #dNd-buttons{
+      margin-top: 400px;
+     margin-left: 35%;
+      align-content: center;
+    }
+    .hidden{
+        visibility: hidden;
+    }
+    .shown{
+        visibility: visible;
+    }
+    #page-title{
+        margin-left: 28%;
+    }
+    .plane {
+        margin-top: 2%;
+        margin-left: 100px;
+        float: left;
+        overflow-y:auto;
+    }
+    label{
+        height: 30px;
+    }
+    .nums{
+        width: 60px;
+        float: right;
+        
+        margin-right: 220px;
+    }
+    .tex{
+        width: 120px;
+        
+        margin-right: 150px;
+        float: right;
+    }
+    .second{
+        margin-left: 20px;
+    }
+    .third{
+        margin-left: 20px;
+    }
+    .fourth{
+        margin-left: 20px;
+    }
+    .fifth{
+        margin-left: 20px;
+    }
+    .settings-zone {
+        width: 500px;
+        height: 400px;
+        border: 2px #ccc;
+        color: #007AA3;
+        text-align: left;
+    }
+    .centered {
+        background-color: #007AA3;
+        color: white;
+        width: 500px;
+    }
+    p{
+        background-color: #007AA3;
+        color: white;
+    }

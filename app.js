@@ -3,19 +3,18 @@ var path = require('path');
 
 var server = new Hapi.Server();
 var fs = require('fs');
-var result = [];
+var roomGenerator = require('./Parser/roomGenerator.js');
 var parser = require('./Parser/Parser-MergeSceneScfg/parser.js');
 var roomFN = "";
 var pathROOM = "";
 var version = "";
-var fileNScene = "", fileNScfg = "";
-var roomDOWNable = undefined;
 var inert = require('inert');
 
 var host = process.env.VCAP_APP_HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || 8080;
 
 var roomPath = "";
+var room = {};
 server.connection({
     port: port,
     host: host
@@ -34,9 +33,72 @@ server.route([{
     },
     {
         method: 'GET',
+        path: '/css/jstree/dist/themes/default/32px.png',
+        handler: {
+            file: 'css/jstree/dist/themes/default/32px.png'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/themes/default/throbber.gif',
+        handler: {
+            file: 'css/jstree/dist/themes/default/throbber.gif'
+        }
+    },
+    {
+        method: 'GET',
         path: '/styles.css',
         handler: {
             file: 'css/styles.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/settingsStyle.css',
+        handler: {
+            file: 'css/settingsStyle.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/themes/default/style.css',
+        handler: {
+            file: 'css/jstree/dist/themes/default/style.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/jstree.min.js',
+        handler: {
+            file: 'css/jstree/dist/jstree.min.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/settings.html',
+        handler: {
+            file: {
+                path: path.join(__dirname, "settings.html")
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/builder',
+        handler: function (request, reply){
+            console.log("Ittvagyok");
+            reply(room);
+        }
+    },
+    {
+        method: 'POST',
+        path: '/roomgenerator',
+        handler: function (request, reply) {
+            console.log("roomgenerator");
+            var myRoomObj = JSON.parse(request.payload.room);
+            var myGeneratedRoom = roomGenerator(myRoomObj);
+            console.log("yee");
+            reply(myGeneratedRoom);
         }
     },
     {
@@ -67,9 +129,9 @@ server.route([{
                     console.log("SUCCESS: One scene file has been uploaded, without scfg.");
                     var SCENE_file_name = Date.now() + file.hapi.filename;
                     fs.writeFileSync("./uploads/" + SCENE_file_name, file._data);
-                    
-                    roomPath = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
-                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
+                    room = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
+                    room.roomName = roomFN;
+                    reply("done");
                     console.log("\n");
                 }
                 else if (file.length == 2) {
@@ -96,10 +158,10 @@ server.route([{
                         return;
                     }
                     console.log("SUCCESS: Scene and scfg file has been uploaded.");
-                    console.log('ASDASDASD');
-                    roomPath = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
-                   
-                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
+                    
+                    room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
+                    room.roomName = roomFN;
+                    reply("done");
                     console.log("\n");
                 }
                 else {

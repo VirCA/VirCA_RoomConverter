@@ -14,27 +14,18 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
     var SCFGroom = Date.now() + "scfg.room";
 
     sceP.sceneParser(sceneFileName, easyOgreExport, SCENEobjectName);
-    sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    var room = {
+        settings: {},
+        content: {
+            node:[]
+        }
+    }
+    room.content.node = sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
     
     scfP.scfgParser(scfgFileName, SCFGobjectName, easyOgreExport);
-    scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
-    
+    room.settings = scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
     var fs = require('fs');
-    
-    var scene = fs.readFileSync("./" + SCENEroom).toString();
-    var scfg = fs.readFileSync("./" + SCFGroom).toString();
-    
-    scene = scene.replace(/\n/gim, "\n\t");
-    scene = "\t" + scene;
-    scfg = scfg.replace(/\n/gim, "\n\t");
-    scfg = "\t" + scfg;
-    var room = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<room name=\"" + roomFilename + "\" version=\"" + version + "\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" + scfg + "\n" + scene + "\n</room>";
-    room = room.replace(/,/gim, ".");
-
-    //fs.writeFileSync(roomFilename + ".room", room);
-    var roomPath = "./uploads/rooms/" + Date.now() + roomFilename + ".room";
-    fs.writeFileSync(roomPath, room);
-
+   
     fs.unlink("./" + SCENEroom, function (err) {
         if (!err)
             console.log(SCENEroom + " : Deleted successfully");
@@ -51,5 +42,5 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
         if (!err)
             console.log(SCFGobjectName + " : Deleted successfully");
     });
-    return roomPath;
+    return room;
 }
