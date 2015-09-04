@@ -1,0 +1,5 @@
+applications:
+- name: roomconverter
+  command: node app.js
+  path: .
+  memory: 256M
