@@ -33,6 +33,76 @@ server.route([{
     },
     {
         method: 'GET',
+        path: '/vircalogo.png',
+        handler: {
+            file: 'vircalogo.png'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/jquery.js',
+        handler: {
+            file: 'js/jquery.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/bootstrap.min.js',
+        handler: {
+            file: 'js/bootstrap.min.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/jquery.easing.min.js',
+        handler: {
+            file: 'js/jquery.easing.min.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/scrolling-nav.js',
+        handler: {
+            file: 'js/scrolling-nav.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/converter_dnd_upload.js',
+        handler: {
+            file: 'js/converter_dnd_upload.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/settings.js',
+        handler: {
+            file: 'js/settings.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/settings.html',
+        handler: {
+            file: 'settings.html'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/bootstrap.min.css',
+        handler: {
+            file: 'css/bootstrap.min.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/scrolling-nav.css',
+        handler: {
+            file: 'css/scrolling-nav.css'
+        }
+    },
+    {
+        method: 'GET',
         path: '/css/jstree/dist/themes/default/32px.png',
         handler: {
             file: 'css/jstree/dist/themes/default/32px.png'
@@ -71,15 +141,6 @@ server.route([{
         path: '/css/jstree/dist/jstree.min.js',
         handler: {
             file: 'css/jstree/dist/jstree.min.js'
-        }
-    },
-    {
-        method: 'GET',
-        path: '/settings.html',
-        handler: {
-            file: {
-                path: path.join(__dirname, "settings.html")
-            }
         }
     },
     {
@@ -138,7 +199,7 @@ server.route([{
                     fs.writeFileSync("./uploads/" + SCENE_file_name, file._data);
                     room = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
-                    reply("done");
+                    reply(fs.readFileSync('./settings.html'));
                     console.log("\n");
                 }
                 else if (file.length == 2) {
@@ -168,7 +229,7 @@ server.route([{
                     
                     room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
-                    reply("done");
+                    reply(fs.readFileSync('./settings.html'));
                     console.log("\n");
                 }
                 else {
