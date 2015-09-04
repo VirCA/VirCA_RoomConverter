@@ -79,7 +79,7 @@
                         <div class="second ">
                             <label>Runtime Shader System:</label>
                             <select class="tex" id="environment_runtimeShaderSystem">
-                                <option value="default"></option>
+                                <option value=""></option>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select>
@@ -87,7 +87,7 @@
                         <div id="shadow" class="second ">
                             <label>Shadow:</label>
                             <select class="tex" id="environment_shadow">
-                                <option value="default"></option>
+                                <option value=""></option>
                                 <option value="NONE">NONE</option>
                                 <option value="DAVE">DAVE</option>
                                 <option value="STENCIL">STENCIL</option>
@@ -98,13 +98,13 @@
                             <div class="third">
                                 <label> Bloom:</label>
                                 <select class="tex" id="environment_compositors_bloom">
-                                    <option value="default"></option>
+                                    <option value=""></option>
                                     <option value="true">True</option>
                                     <option value="false">False</option>
                                 </select><br>
                                 <label> Motion Blur:</label>
                                 <select class="tex" id="environment_compositors_motionBlur">
-                                    <option value="default"></option>
+                                    <option value=""></option>
                                     <option value="true">True</option>
                                     <option value="false">False</option>
                                 </select>
@@ -115,7 +115,7 @@
                             <div class="third">
                                 <label>Type:</label>
                                 <select class="tex" id="environment_fog_type">
-                                    <option value="default"></option>
+                                    <option value=""></option>
                                     <option value="NONE">NONE</option>
                                     <option value="LINEAR">LINEAR</option>
                                     <option value="EXP">EXP</option>
@@ -149,13 +149,13 @@
                         <div id="pointer" class="second">
                             <label>Visibility:</label>
                             <select class="tex" id="pointer_visibility">
-                                <option value="default"></option>
+                                <option value=""></option>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select><br>
                             <label>Crosshairs:</label>
                             <select class="tex" id="pointer_crosshairs">
-                                <option value="default"></option>
+                                <option value=""></option>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select><br>
@@ -316,7 +316,7 @@
                             <input type="text" class="tex" id="presentation_fileName"><br>
                             <label>Enabled:</label>
                             <select class="tex" id="presentation_enabled">
-                                <option value="default"></option>
+                                <option value=""></option>
                                 <option value="true">True</option>
                                 <option value="false">False</option>
                             </select><br>
@@ -565,7 +565,7 @@
         $('#camera_pose_orientation_qy').val(room.settings.camera.pose.orientation.quaternion.y);
         $('#camera_pose_orientation_qz').val(room.settings.camera.pose.orientation.quaternion.z);
         $('#camera_pose_orientation_qw').val(room.settings.camera.pose.orientation.quaternion.w);
-        $('#camera_clipping_near').val(room.settings.camera.clipping.far);
+        $('#camera_clipping_near').val(room.settings.camera.clipping.near);
         $('#camera_clipping_far').val(room.settings.camera.clipping.far);
         $('#camera_fov').val(room.settings.camera.fov);
         //-----------------browserStartPage----------------
@@ -773,7 +773,7 @@
 
                 }
                 else if ($('#room_content_node' + i + '_light_type').val() == "s") {
-                    room.content.node[i].light.type.spot.attenuation.range = $('#room_content_node' + i + '_light_type_point_attenuation_range').val();
+                    room.content.node[i].light.type.spot.attenuation.range = $('#room_content_node' + i + '_light_type_spot_attenuation_range').val();
                     room.content.node[i].light.type.spot.attenuation.manual.constant = $('#room_content_node' + i + '_light_type_spot_attenuation_manual_constant').val();
                     room.content.node[i].light.type.spot.attenuation.manual.linear = $('#room_content_node' + i + '_light_type_spot_attenuation_manual_linear').val();
                     room.content.node[i].light.type.spot.attenuation.manual.quadratic = $('#room_content_node' + i + '_light_type_spot_attenuation_manual_quadratic').val();
