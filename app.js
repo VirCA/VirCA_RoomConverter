@@ -93,12 +93,19 @@ server.route([{
     {
         method: 'POST',
         path: '/roomgenerator',
-        handler: function (request, reply) {
-            console.log("roomgenerator");
-            var myRoomObj = JSON.parse(request.payload.room);
-            var myGeneratedRoom = roomGenerator(myRoomObj);
-            console.log("yee");
-            reply(myGeneratedRoom);
+        config: {
+            handler: function (request, reply) {
+                console.log("roomgenerator");
+                var myRoomObj = JSON.parse(request.payload.room);
+                var myGeneratedRoom = roomGenerator(myRoomObj);
+                console.log("yee");
+                //console.log(myGeneratedRoom);
+                fs.writeFile('te.txt', myGeneratedRoom);
+                reply(myGeneratedRoom);
+            },
+            payload: {
+                maxBytes: 10485760
+            }
         }
     },
     {
@@ -172,7 +179,8 @@ server.route([{
             payload: {
                 output: 'stream',
                 parse: true,
-                allow: 'multipart/form-data'
+                allow: 'multipart/form-data',
+                maxBytes: 10485760
             }
         }
     }

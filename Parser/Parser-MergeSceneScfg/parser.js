@@ -20,7 +20,10 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
             node:[]
         }
     }
-    room.content.node = sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    tmpObj = sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    room.content.node = tmpObj.nodes;
+    room.nodeTypes = tmpObj.nodesType;
+    room.lightType = tmpObj.lightType;
     
     scfP.scfgParser(scfgFileName, SCFGobjectName, easyOgreExport);
     room.settings = scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);

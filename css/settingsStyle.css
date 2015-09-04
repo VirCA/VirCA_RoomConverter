@@ -21,16 +21,18 @@
         margin-top: 2%;
         margin-left: 100px;
         float: left;
-        overflow-y:auto;
     }
     label{
         height: 30px;
     }
     .nums{
-        width: 60px;
+        width: 100px;
         float: right;
         
-        margin-right: 220px;
+        margin-right: 150px;
+    }
+    footer{
+        margin-top: 420px;
     }
     .tex{
         width: 120px;
@@ -56,6 +58,7 @@
         border: 2px #ccc;
         color: #007AA3;
         text-align: left;
+        overflow-y:scroll;
     }
     .centered {
         background-color: #007AA3;
@@ -65,4 +68,9 @@
     p{
         background-color: #007AA3;
         color: white;
+    }
+    #jstree{
+        width: 500px;
+        height: 400px;
+        overflow-y:scroll;
     }

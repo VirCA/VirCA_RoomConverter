@@ -10,7 +10,10 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 		var str = "";
 
-		var nodes = [];
+    var nodes = [];
+    var nodesType = [];
+    var lightType = [];
+    var p = 0;
 
 		var i = 0;
 		while(i < fromJSON.length){
@@ -301,11 +304,6 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
 
-				if(fromJSON[i].figure.width.toString().indexOf(".") >=0)
-					fromJSON[i].figure.width = fromJSON[i].figure.width.substring(0, fromJSON[i].figure.width.indexOf("."));
-				if(fromJSON[i].figure.height.toString().indexOf(".") >=0)
-					fromJSON[i].figure.height = fromJSON[i].figure.height.substring(0, fromJSON[i].figure.height.indexOf("."));
-
 				node.figure.width = fromJSON[i].figure.width;
 				node.figure.height = fromJSON[i].figure.height;
 				node.figure.materialName = fromJSON[i].figure.material;
@@ -316,7 +314,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 			}
 			else if(fromJSON[i].mainType == "light"){
 				node['@'].name = fromJSON[i].name;
-            
+                lightType[p] = fromJSON[i].type;
+                ++p;
                 node.pose.position.x = fromJSON[i].position.x;
 				node.pose.position.y = fromJSON[i].position.y;
                 node.pose.position.z = fromJSON[i].position.z;
@@ -418,8 +417,9 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
        
 			
 			str += js2xml("node", node) + "\n";
-			nodes.push(node);
-			++i;
+        nodes.push(node);
+        nodesType.push(fromJSON[i].mainType);
+        ++i;
 
 		}
 		
@@ -451,7 +451,17 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 			else
 				console.log("\nYour .room file has written succesfully!");
 		});*/
-    return nodes;
+    var completeObject = {
+        nodes: [],
+        nodesType: [],
+        lightType: []
+    };
+
+    completeObject.nodes = nodes;
+    completeObject.nodesType = nodesType;
+    completeObject.lightType = lightType;
+
+    return completeObject;
 	}
 
 	function rotation(object){
