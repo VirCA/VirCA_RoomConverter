@@ -185,8 +185,7 @@ function Initialing() {
     $('#environment_backgroundColor_g').val(room.settings.environment.backgroundColor.g);
     $('#environment_backgroundColor_b').val(room.settings.environment.backgroundColor.b);
     $('#environment_backgroundColor_a').val(room.settings.environment.backgroundColor.a);
-    $('#environment_runtimeShaderSystem').val(room.settings.environment.runtimeshadersystem);
-    $('#environment_shadow').val(room.settings.environment.shadow);
+    $('#environment_shadow').val(room.settings.environment.shader);
     $('#environment_compositors_bloom').val(room.settings.environment.compositors.Bloom);
     $('#environment_compositors_motionBlur').val(room.settings.environment.compositors.MotionBlur);
     $('#environment_fog_type').val(room.settings.environment.fog.type);
@@ -542,7 +541,7 @@ function GetTree() {
 }
 function ContentCreation() {
     var p = 0;
-    var shown, shownValue, other1, other1Value, other2, other2Value;
+    var shown, shownValue, other1, other1Value, other2, other2Value, sHidden = "hidden", dHidden = "hidden", pHidden = "hidden";
     for (var i = 0; i < room.nodeTypes.length; ++i) {
         $('#content').append('<div class="hidden" id="content_node' + i + '">');//content_node1
         $('#content_node' + i).append('<div class="first" id="content_node' + i + '_name"><label>Node name:</label><input type="text" class"tex" id="content_node' + i + '_nameValue" value="' + room.content.node[i]['@'].name + '"></div>');//content_node1_nameValue
@@ -695,6 +694,7 @@ function ContentCreation() {
                 other1Value = 'd';
                 other2 = 'Point';
                 other2Value = 'p';
+                shidden ="";
             }
             else if (room.lightType[p] == 'point') {
                 shown = 'Point';
@@ -703,6 +703,7 @@ function ContentCreation() {
                 other1Value = 'd';
                 other2 = 'Spot';
                 other2Value = 's';
+                phidden = "";
             }
             else if (room.lightType[p] == 'directional') {
                 shown = 'Directional';
@@ -711,13 +712,14 @@ function ContentCreation() {
                 other1Value = 's';
                 other2 = 'Point';
                 other2Value = 'p';
+                dhidden = "";
             }
             ++p;
             $('#content_node' + i).append('<label>Type:</label>');
             $('#content_node' + i).append('<select class="tex" id="room_content_node' + i + '_light_type"><option value="' + shownValue + '">' + shown + '</option><option value="' + other1Value + '">' + other1 + '</option><option value="' + other2Value + '">' + other2 + '</option></select><br><br>');
             $('#content_node' + i).append(
                 '<div class="fifth">' +
-                '   <div class="fifth hidden" id="room_content_node' + i + '_light_type_point">' +
+                '   <div class="fifth '+pHidden+'" id="room_content_node' + i + '_light_type_point">' +
                 '       <label>Attenuation: </label>' +
                 '       <div class="fifth">' +
                 '           <label>Range:</label>' +
@@ -733,7 +735,7 @@ function ContentCreation() {
                 '           </div>' +
                 '       </div>' +
                 '   </div>' +
-                '   <div class="fifth hidden" id="room_content_node' + i + '_light_type_directional">' +
+                '   <div class="fifth ' + dHidden + '" id="room_content_node' + i + '_light_type_directional">' +
                 '       <label>Direction: </label>' +
                 '           <div class="fifth">' +
                 '               <label>x:</label>' +
@@ -745,7 +747,7 @@ function ContentCreation() {
                 '           </div>' +
                 '       </div>' +
                 '   </div>' +
-                '     <div class="fifth hidden" id="room_content_node' + i + '_light_type_spot">' +
+                '     <div class="fifth ' + sHidden + '" id="room_content_node' + i + '_light_type_spot">' +
                 '       <label>Range:</label>' +
                 '       <div class="fifth">' +
                 '           <label>Inner: </label>' +

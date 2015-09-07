@@ -21,10 +21,10 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
             settings.environment.ambientColor.a = 1;
         }
         
-        if (fromJSON.light.runtimeshadersystem.enable != undefined)
-            settings.environment.runtimeshadersystem = fromJSON.light.runtimeshadersystem.enable;
         if (fromJSON.light.shadow.type != undefined)
-            settings.environment.shadow = fromJSON.light.shadow.type;
+            settings.environment.shader = fromJSON.light.shadow.type;
+        if (fromJSON.light.runtimeshadersystem.enable == "true" && fromJSON.light.shadow.type == "NONE")
+            settings.environment.shader = "RTSS";
         if (fromJSON.light.compositors.Bloom.enable != undefined)
             settings.environment.compositors.Bloom = fromJSON.light.compositors.Bloom.enable;
         if (fromJSON.light.compositors.MotionBlur.enable != undefined)

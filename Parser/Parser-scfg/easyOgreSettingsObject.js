@@ -12,8 +12,7 @@ module.exports = {
             b: "0",
             a: "1"
         },
-        runtimeshadersystem: "true",
-        shadow: "NONE",
+        shader: "RTSS",
         compositors: {
             Bloom: "false",
             MotionBlur: "false"

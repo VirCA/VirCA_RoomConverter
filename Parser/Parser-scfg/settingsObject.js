@@ -16,8 +16,7 @@ module.exports = {
             b: "0",
             a: "1"
         },
-        runtimeshadersystem: undefined,
-        shadow: undefined,
+        shader: undefined,
         compositors: {
             Bloom: undefined,
             MotionBlur: undefined
