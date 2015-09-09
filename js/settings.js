@@ -185,7 +185,7 @@ function Initialing() {
     $('#environment_backgroundColor_g').val(room.settings.environment.backgroundColor.g);
     $('#environment_backgroundColor_b').val(room.settings.environment.backgroundColor.b);
     $('#environment_backgroundColor_a').val(room.settings.environment.backgroundColor.a);
-    $('#environment_shadow').val(room.settings.environment.shader);
+    $('#environment_shader').val(room.settings.environment.shader);
     $('#environment_compositors_bloom').val(room.settings.environment.compositors.Bloom);
     $('#environment_compositors_motionBlur').val(room.settings.environment.compositors.MotionBlur);
     $('#environment_fog_type').val(room.settings.environment.fog.type);
@@ -277,8 +277,7 @@ function GetSettingsObject() {
     room.settings.environment.backgroundColor.g = $('#environment_backgroundColor_g').val();
     room.settings.environment.backgroundColor.b = $('#environment_backgroundColor_b').val();
     room.settings.environment.backgroundColor.a = $('#environment_backgroundColor_a').val();
-    room.settings.environment.runtimeshadersystem = $('#environment_runtimeShaderSystem').val();
-    room.settings.environment.shadow = $('#environment_shadow').val();
+    room.settings.environment.shader = $('#environment_shader').val();
     room.settings.environment.compositors.Bloom = $('#environment_compositors_bloom').val();
     room.settings.environment.compositors.MotionBlur = $('#environment_compositors_motionBlur').val();
     room.settings.environment.fog.type = $('#environment_fog_type').val();

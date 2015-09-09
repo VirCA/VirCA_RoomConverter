@@ -8,13 +8,15 @@ exports.sceneParser = function (filename, easyOgreExport, objectName){
 	var nodes = [];
 	var i = 0;
 	while(scene.indexOf("<node") != -1){
-		
-		nodes.push(
-			parseOneNode(scene)
-        );
-        if (easyOgreExport == "on")
-            nodeMultiplier(nodes[i]);
-        ++i;
+        
+            nodes.push(
+                parseOneNode(scene)
+            );
+            if (easyOgreExport == "on")
+                nodeMultiplier(nodes[i]);
+            
+            ++i;
+        
 		scene = removeNode(scene);
 	}
 		jsfl.writeFileSync(objectName, nodes);

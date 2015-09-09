@@ -19,177 +19,177 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 		while(i < fromJSON.length){
 			var node = {
 				"@": {
-					name: undefined
+					name: ""
 				},
 				"pose":{
 					"position":{
-						"x": undefined,
-						"y": undefined, 
-						"z": undefined
+						"x": "",
+						"y": "", 
+						"z": ""
 					},
 					"orientation":{
 						"ypr":{
-							"yaw": undefined,
-							"pitch": undefined,
-							"roll": undefined
+							"yaw": "",
+							"pitch": "",
+							"roll": ""
 						},
 						"angleAxis":{
-							"angle": undefined,
+							"angle": "",
 							"axis" :{
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
+								"x": "",
+								"y": "",
+								"z": ""
 							}
 						},
 						"quaternion":{
-							"x": undefined,
-							"y": undefined,
-							"z": undefined,
-							"w": undefined
+							"x": "",
+							"y": "",
+							"z": "",
+							"w": ""
 						},
 						"rotMatrix":{
-							"xx":undefined,
-							"xy":undefined,
-							"xz":undefined,
-							"yx":undefined,
-							"yy":undefined,
-							"yz":undefined,
-							"zx":undefined,
-							"zy":undefined,
-							"zz":undefined
+							"xx":"",
+							"xy":"",
+							"xz":"",
+							"yx":"",
+							"yy":"",
+							"yz":"",
+							"zx":"",
+							"zy":"",
+							"zz":""
 						}
 					}
 				},
 				"scale":{
-					"x": undefined,
-					"y": undefined,
-					"z": undefined
+					"x": "",
+					"y": "",
+					"z": ""
 				},
 				"entity":{
-					"meshFileName": undefined,
-					"castShadows": undefined
+					"meshFileName": "",
+					"castShadows": ""
 				},
 				"browser":{
-					"url": undefined,
-					"shared": undefined,
-					"draggable": undefined,
-					"snappedToWall": undefined,
-					"width": undefined,
-                    "height": undefined,
-                    "resH": undefined,
-                    "resV": undefined,
-					"zoom": undefined
+					"url": "",
+					"shared": "",
+					"draggable": "",
+					"snappedToWall": "",
+					"width": "",
+                    "height": "",
+                    "resH": "",
+                    "resV": "",
+					"zoom": ""
 				},
 				"figure":{
-					"width": undefined,
-					"height": undefined,
-					"materialName": undefined,
-					"draggable": undefined,
-					"castShadows": undefined
+					"width": "",
+					"height": "",
+					"materialName": "",
+					"draggable": "",
+					"castShadows": ""
 				},
 				"plane":{
-					"width": undefined,
-					"height": undefined,
-					"materialName": undefined,
-					"movablePlane": undefined,
-					"distance": undefined,
-					"xSegment": undefined,
-					"ySegment": undefined,
-					"numTexCoordSets": undefined,
-					"uTile": undefined,
-					"vTile": undefined,
-					"normals": undefined,
-					"tangents": undefined,
-					"castShadows": undefined,
+					"width": "",
+					"height": "",
+					"materialName": "",
+					"movablePlane": "",
+					"distance": "",
+					"xSegment": "",
+					"ySegment": "",
+					"numTexCoordSets": "",
+					"uTile": "",
+					"vTile": "",
+					"normals": "",
+					"tangents": "",
+					"castShadows": "",
 					"normal": {
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
+						"x": "",
+						"y": "",
+						"z": ""
 					},
 					"upVector": {
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
+						"x": "",
+						"y": "",
+						"z": ""
 					}
 				},
 				"light":{
 					"offset":{
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
+						"x": "",
+						"y": "",
+						"z": ""
 					},
 					"diffuse": {
-						"r": undefined,
-						"g": undefined,
-						"b": undefined,
-						"a": undefined
+						"r": "",
+						"g": "",
+						"b": "",
+						"a": ""
 					},
 					"specular":{
-						"r": undefined,
-						"g": undefined,
-						"b": undefined,
-						"a": undefined
+						"r": "",
+						"g": "",
+						"b": "",
+						"a": ""
 					},
-					"castShadows": undefined,
+					"castShadows": "",
 					"type": {
 						"spot":{
 							"range":{
-								"inner": undefined,
-								"outer": undefined,
-								"falloff": undefined
+								"inner": "",
+								"outer": "",
+								"falloff": ""
 							},
 							"attenuation":{
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant":undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant":"",
+									"linear": "",
+									"quadratic": ""
 								},
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant": "",
+									"linear": "",
+									"quadratic": ""
 								},
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant": "",
+									"linear": "",
+									"quadratic": ""
 								},
 							},
 							"direction": {
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
+								"x": "",
+								"y": "",
+								"z": ""
 							}
 						},
 						"directional":{
 							"direction":{
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
+								"x": "",
+								"y": "",
+								"z": ""
 							}
 						},
 						"point":{
 							"attenuation":{
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant": "",
+									"linear": "",
+									"quadratic": ""
 								},
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant": "",
+									"linear": "",
+									"quadratic": ""
 								},
-								"range": undefined,
+								"range": "",
 								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
+									"constant": "",
+									"linear": "",
+									"quadratic": ""
 								},
 							}
 						}
@@ -208,8 +208,11 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.scale.x =  fromJSON[i].scale.x;
 				node.scale.y =  fromJSON[i].scale.y,
 				node.scale.z =  fromJSON[i].scale.z;
-
-				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
+            
+                node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
+                if (node.entity.meshFileName == undefined) {
+                    node.entity.meshFileName = "";
+                }
 				//console.log(fromJSON[i].entity.details.meshFile);
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
 
