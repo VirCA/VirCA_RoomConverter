@@ -37,26 +37,26 @@
                             <label>Ambient Color:</label>
                             <div class="third">
                                 <label>r: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_ambientColor_r"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_r"><br>
                                 <label>g: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_ambientColor_g"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_g"><br>
                                 <label>b: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_ambientColor_b"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_b"><br>
                                 <label>a: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_ambientColor_a"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_a"><br>
                             </div>
                         </div>
                         <div id="environment_backgroundColor" class="second">
                             <label>Background Color:</label>
                             <div class="third">
                                 <label>r: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_backgroundColor_r"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_r"><br>
                                 <label>g: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_backgroundColor_g"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_g"><br>
                                 <label>b: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_backgroundColor_b"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_b"><br>
                                 <label>a: </label>
-                                <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_backgroundColor_a"><br>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_a"><br>
                             </div>
                         </div>
                         <div id="shadow" class="second ">
@@ -100,20 +100,20 @@
                                 <label>Color:</label>
                                 <div class="fourth">
                                     <label>r: </label>
-                                    <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_fog_color_r"><br>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_r"><br>
                                     <label>g: </label>
-                                    <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_fog_color_g"><br>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_g"><br>
                                     <label>b: </label>
-                                    <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_fog_color_b"><br>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_b"><br>
                                     <label>a: </label>
-                                    <input class="nums" type="number" min="0" max="1" step="0.01" id="environment_fog_color_a"><br>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_a"><br>
                                 </div><br>
                                 <label>Linear Start:</label>
-                                <input class="nums" type="number"  id="environment_fog_linearStart" value="0.0"><br>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_linearStart" value=""><br>
                                 <label>Linear Stop:</label>
-                                <input class="nums" type="number"  id="environment_fog_linearStop" value="0.0"><br>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_linearStop" value=""><br>
                                 <label>Exp Density:</label>
-                                <input class="nums" type="number"  id="environment_fog_expDensity" value="0.0"><br>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_expDensity" value=""><br>
 
                             </div>
 
@@ -136,15 +136,15 @@
                                 <option value="false">False</option>
                             </select><br>
                             <label>Length:</label>
-                            <input class="nums" type="number" min="0" id="pointer_length" value="0.0"><br>
+                            <input class="nums" type="number" step="0.001" id="pointer_length" value="0.0"><br>
                             <label>Offset:</label>
                             <div class="third">
                                 <label>x: </label>
-                                <input class="nums" type="number" id="camera_pointer_offset_x"><br>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_x"><br>
                                 <label>y: </label>
-                                <input class="nums" type="number" id="camera_pointer_offset_y"><br>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_y"><br>
                                 <label>z: </label>
-                                <input class="nums" type="number" id="camera_pointer_offset_z"><br>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_z"><br>
                             </div>
                         </div>
 
@@ -156,23 +156,23 @@
                             <label>xLimit:</label>
                             <div class="third">
                                 <label>min:</label>
-                                <input class="nums" type="number" id="boundaries_xLimit_min"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_xLimit_min"><br>
                                 <label>max:</label>
-                                <input class="nums" type="number" id="boundaries_xLimit_max"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_xLimit_max"><br>
                             </div>
                             <label>yLimit:</label>
                             <div class="third">
                                 <label>min:</label>
-                                <input class="nums" type="number" id="boundaries_yLimit_min"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_yLimit_min"><br>
                                 <label>max:</label>
-                                <input class="nums" type="number" id="boundaries_yLimit_max"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_yLimit_max"><br>
                             </div>
                             <label>zLimit:</label>
                             <div class="third">
                                 <label>min:</label>
-                                <input class="nums" type="number" id="boundaries_zLimit_min"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_zLimit_min"><br>
                                 <label>max:</label>
-                                <input class="nums" type="number" id="boundaries_zLimit_max"><br>
+                                <input class="nums" type="number" step="0.001" id="boundaries_zLimit_max"><br>
                             </div>
                         </div>
 
@@ -186,11 +186,11 @@
                                 <label>Position:</label>
                                 <div class="fourth">
                                     <label>x: </label>
-                                    <input class="nums" type="number" id="camera_pose_position_x"><br>
+                                    <input class="nums" type="number" step="0.001" step="0.001" id="camera_pose_position_x"><br>
                                     <label>y: </label>
-                                    <input class="nums" type="number" id="camera_pose_position_y"><br>
+                                    <input class="nums" type="number" step="0.001" id="camera_pose_position_y"><br>
                                     <label>z: </label>
-                                    <input class="nums" type="number" id="camera_pose_position_z"><br>
+                                    <input class="nums" type="number" step="0.001" id="camera_pose_position_z"><br>
                                 </div>
 
                                 <label>Orientation:</label>
@@ -205,55 +205,55 @@
                                     <div class="fifth">
                                         <div id="camera_quaternion">
                                             <label>x: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_qx"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qx"><br>
                                             <label>y: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_qy"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qy"><br>
                                             <label>z: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_qz"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qz"><br>
                                             <label>w: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_qw"><br> 
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qw"><br> 
                                         </div>
                                         <div id="camera_angleAxis">
                                             <label>Angle: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_angle"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_angle"><br>
                                             <label>Axis: </label>
                                             <div class="fifth">
                                                 <label>x: </label>
-                                                <input class="nums" type="number" id="camera_pose_orientation_axis_x"><br>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_x"><br>
                                                 <label>y: </label>
-                                                <input class="nums" type="number" id="camera_pose_orientation_axis_y"><br>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_y"><br>
                                                 <label>z: </label>
-                                                <input class="nums" type="number" id="camera_pose_orientation_axis_z"><br>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_z"><br>
                                             </div>
                                         </div>
                                         <div id="camera_ypr">
                                             <label>Yaw: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_yaw"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yaw"><br>
                                             <label>Pitch: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_pitch"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_pitch"><br>
                                             <label>Roll: </label>
-                                            <input class="nums" type="number" id="camera_pose_orientation_roll"><br>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_roll"><br>
                                         </div>
                                         <div id="camera_rotMatrix">
                                            <div class="fifth">
                                                <label>xx</label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_xx"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xx"><br>
                                                <label>xy </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_xy"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xy"><br>
                                                <label>xz </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_xz"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xz"><br>
                                                <label>yx</label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_yx"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yx"><br>
                                                <label>yy </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_yy"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yy"><br>
                                                <label>yz </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_yz"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yz"><br>
                                                <label>zx</label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_zx"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zx"><br>
                                                <label>zy </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_zy"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zy"><br>
                                                <label>zz </label>
-                                               <input class="nums" type="number" id="camera_pose_orientation_zz"><br>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zz"><br>
                                            </div>
                                         </div>
                                     </div>
@@ -265,14 +265,14 @@
                             <label>Clipping:</label>
                             <div class="third">
                                 <label>Near:</label>
-                                <input class="nums" type="number" id="camera_clipping_near"><br>
+                                <input class="nums" step="0.001" type="number" id="camera_clipping_near"><br>
                                 <label>Far:</label>
-                                <input class="nums" type="number" id="camera_clipping_far"><br>
+                                <input class="nums" step="0.001" type="number" id="camera_clipping_far"><br>
                             </div>
                         </div>
                         <div class="second">
                             <label>Fov:</label>
-                            <input class="nums" type="number" id="camera_fov">
+                            <input class="nums" step="0.001" type="number" id="camera_fov">
                         </div>
 
                     </div>

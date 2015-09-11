@@ -31,6 +31,8 @@
                         //console.log(formData);
                         xhr.send(formData);
                         xhr.onloadend = function () {
+
+                            
                             data = xhr.responseText;
                             console.log("Convertation done.");
                             //window.open("/settings.html");
@@ -52,6 +54,8 @@
                     //console.log(files);
                     dropzone.className = 'dropzone';
                     easyOgreExport = undefined;
+
+                    document.getElementById('settings_site').innerHTML = "If you upload file(s), on this place will be the settings site.";
                 };
             }
 

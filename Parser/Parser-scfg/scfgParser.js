@@ -9,12 +9,15 @@ exports.scfgParser = function(filename, objectName, easyOgreExport) {
         var newBase = parsing.cutContentFromBegining(base, "<environment", "</environment>");
         if (newBase.indexOf("colourAmbient") >= 0) {
             var b1 = parsing.cutContentFromBegining(newBase, "<colourAmbient", "/>");
+            
+            b1 = b1.substring(14);
             settings.environment.ambientColor.r = parsing.tagBase(b1, "r");
             settings.environment.ambientColor.g = parsing.tagBase(b1, "g");
             settings.environment.ambientColor.b = parsing.tagBase(b1, "b");
         }
         if (newBase.indexOf("colourBackground") >= 0) {
             var b2 = parsing.cutContentFromBegining(newBase, "<colourBackground", "/>");
+            b2 = b2.substring(16);
             settings.environment.backgroundColor.r = parsing.tagBase(b2, "r");
             settings.environment.backgroundColor.g = parsing.tagBase(b2, "g");
             settings.environment.backgroundColor.b = parsing.tagBase(b2, "b");

@@ -13,6 +13,8 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
     var SCENEroom = Date.now() + "scene.room";
     var SCFGroom = Date.now() + "scfg.room";
 
+    var rounder = require("../rounder.js");
+
     sceP.sceneParser(sceneFileName, easyOgreExport, SCENEobjectName);
     var room = {
         settings: {},
@@ -20,6 +22,7 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
             node:[]
         }
     }
+
     tmpObj = sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
     room.content.node = tmpObj.nodes;
     room.nodeTypes = tmpObj.nodesType;
@@ -45,5 +48,10 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
         if (!err)
             console.log(SCFGobjectName + " : Deleted successfully");
     });
+
+    room.settings = rounder(room.settings, room.content).settings;
+
+    room.content = rounder(room.settings, room.content).content;
+
     return room;
 }

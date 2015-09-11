@@ -174,6 +174,7 @@ server.route([{
         path: '/upload',
         config: {
             handler: function (request, reply) {
+                room = {};
                 var file = request.payload.file;
                  version = 1.0;
                 easyOgreExport = request.payload.easyOgreExport;
@@ -229,6 +230,7 @@ server.route([{
                     
                     room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
+                    console.log(room.content.node[10].plane.width);
                     reply(fs.readFileSync('./settings.html'));
                     console.log("\n");
                 }

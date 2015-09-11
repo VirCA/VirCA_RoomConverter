@@ -234,32 +234,36 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				//console.log(fromJSON[i].entity.details.meshFile);
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
+				if(fromJSON[i].plane != undefined){
+					if(fromJSON[i].plane.width.toString().indexOf(".") >=0)
+						fromJSON[i].plane.width = fromJSON[i].plane.width.toString().substring(0, fromJSON[i].plane.width.indexOf("."));
+					if(fromJSON[i].plane.height.toString().indexOf(".") >=0)
+						fromJSON[i].plane.height = fromJSON[i].plane.height.toString().substring(0, fromJSON[i].plane.height.indexOf("."));
 
-				if(fromJSON[i].plane.width.indexOf(".") >=0)
-					fromJSON[i].plane.width = fromJSON[i].plane.width.substring(0, fromJSON[i].plane.width.indexOf("."));
-				if(fromJSON[i].plane.height.indexOf(".") >=0)
-					fromJSON[i].plane.height = fromJSON[i].plane.height.substring(0, fromJSON[i].plane.height.indexOf("."));
+					node.plane.width = fromJSON[i].plane.width;
+					node.plane.height = fromJSON[i].plane.height;
+					node.plane.materialName = fromJSON[i].plane.material;
+					node.plane.movablePlane = fromJSON[i].plane.movablePlane;
+					node.plane.distance = fromJSON[i].plane.distance;
+					node.plane.xSegment = fromJSON[i].plane.xSegments;
+					//console.log("xseg: "+ node.plane.xSegment);
+					node.plane.ySegment = fromJSON[i].plane.ySegments;
 
-				node.plane.width = fromJSON[i].plane.width;
-				node.plane.height = fromJSON[i].plane.height;
-				node.plane.materialName = fromJSON[i].plane.material;
-				node.plane.movablePlane = fromJSON[i].plane.movablePlane;
-				node.plane.distance = fromJSON[i].plane.distance;
-				node.plane.xSegment = fromJSON[i].plane.xSegments;
-				node.plane.ySegment = fromJSON[i].plane.ySegments;
-				node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;
-				node.plane.uTile = fromJSON[i].plane.uTile;
-				node.plane.vTile = fromJSON[i].plane.vTile;
-				node.plane.normals = fromJSON[i].plane.normals;
-				node.plane.castShadows = fromJSON[i].plane.castShadows;
-				node.plane.tangents = fromJSON[i].plane.tangents;
+					//console.log("yseg: "+ node.plane.ySegment);
+					node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;
+					node.plane.uTile = fromJSON[i].plane.uTile;
+					node.plane.vTile = fromJSON[i].plane.vTile;
+					node.plane.normals = fromJSON[i].plane.normals;
+					node.plane.castShadows = fromJSON[i].plane.castShadows;
+					node.plane.tangents = fromJSON[i].plane.tangents;
 
-				node.plane.normal.x = fromJSON[i].plane.normal.x;
-				node.plane.normal.y = fromJSON[i].plane.normal.y;
-				node.plane.normal.z = fromJSON[i].plane.normal.z;
-				node.plane.upVector.x = fromJSON[i].plane.upVector.x;
-				node.plane.upVector.y = fromJSON[i].plane.upVector.y;
-				node.plane.upVector.z = fromJSON[i].plane.upVector.z;
+					node.plane.normal.x = fromJSON[i].plane.normal.x;
+					node.plane.normal.y = fromJSON[i].plane.normal.y;
+					node.plane.normal.z = fromJSON[i].plane.normal.z;
+					node.plane.upVector.x = fromJSON[i].plane.upVector.x;
+					node.plane.upVector.y = fromJSON[i].plane.upVector.y;
+					node.plane.upVector.z = fromJSON[i].plane.upVector.z;
+				}
 			}
 			else if(fromJSON[i].mainType == "browser"){
 				node['@'].name = fromJSON[i].detail.name;
@@ -540,3 +544,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				}
 				return;
 	}
+
+function rounding(str) {
+    return (Math.round(parseFloat(str.toString()) * 1000) / 1000).toString();
+}

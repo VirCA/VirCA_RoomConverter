@@ -470,32 +470,32 @@ function GetContentObject() {
             }
         }
         else if (room.nodeTypes[i] == "figure") {
-            room.content.node[i].figure.width = $('#room_content_node' + i + '_figure_width');
-            room.content.node[i].figure.height = $('#room_content_node' + i + '_figure_height');
-            room.content.node[i].figure.materialName = $('#room_content_node' + i + '_figure_materialName');
-            room.content.node[i].figure.castShadows = $('#room_content_node' + i + '_figure_castShadows');
-            room.content.node[i].figure.draggable = $('#room_content_node' + i + '_figure_draggable');
+            room.content.node[i].figure.width = $('#room_content_node' + i + '_figure_width').val();
+            room.content.node[i].figure.height = $('#room_content_node' + i + '_figure_height').val();
+            room.content.node[i].figure.materialName = $('#room_content_node' + i + '_figure_materialName').val();
+            room.content.node[i].figure.castShadows = $('#room_content_node' + i + '_figure_castShadows').val();
+            room.content.node[i].figure.draggable = $('#room_content_node' + i + '_figure_draggable').val();
         }
         else if (room.nodeTypes[i] == "plane") {
-            room.content.node[i].plane.width = $('#room_content_node' + i + '_plane_width');
-            room.content.node[i].plane.height = $('#room_content_node' + i + '_plane_height');
-            room.content.node[i].plane.materialName = $('#room_content_node' + i + '_plane_materialName');
-            room.content.node[i].plane.movablePlane = $('#room_content_node' + i + '_plane_movablePlane');
-            room.content.node[i].plane.distance = $('#room_content_node' + i + '_plane_distance');
-            room.content.node[i].plane.xSegment = $('#room_content_node' + i + '_plane_xSegment');
-            room.content.node[i].plane.ySegment = $('#room_content_node' + i + '_plane_ySegment');
-            room.content.node[i].plane.numTexCoordSets = $('#room_content_node' + i + '_plane_numTexCoordSets');
-            room.content.node[i].plane.uTile = $('#room_content_node' + i + '_plane_uTile');
-            room.content.node[i].plane.vTile = $('#room_content_node' + i + '_plane_vTile');
-            room.content.node[i].plane.normals = $('#room_content_node' + i + '_plane_normals');
-            room.content.node[i].plane.tangents = $('#room_content_node' + i + '_plane_tangents');
-            room.content.node[i].plane.castShadows = $('#room_content_node' + i + '_plane_castShadows');
-            room.content.node[i].plane.normal.x = $('#room_content_node' + i + '_plane_normal_x');
-            room.content.node[i].plane.normal.y = $('#room_content_node' + i + '_plane_normal_y');
-            room.content.node[i].plane.normal.z = $('#room_content_node' + i + '_plane_normal_z');
-            room.content.node[i].plane.upVector.x = $('#room_content_node' + i + '_plane_upVector_x');
-            room.content.node[i].plane.upVector.y = $('#room_content_node' + i + '_plane_upVector_y');
-            room.content.node[i].plane.upVector.z = $('#room_content_node' + i + '_plane_upVector_z');
+            room.content.node[i].plane.width = $('#room_content_node' + i + '_plane_width').val();
+            room.content.node[i].plane.height = $('#room_content_node' + i + '_plane_height').val();
+            room.content.node[i].plane.materialName = $('#room_content_node' + i + '_plane_materialName').val();
+            room.content.node[i].plane.movablePlane = $('#room_content_node' + i + '_plane_movablePlane').val();
+            room.content.node[i].plane.distance = $('#room_content_node' + i + '_plane_distance').val();
+            room.content.node[i].plane.xSegment = $('#room_content_node' + i + '_plane_xSegment').val();
+            room.content.node[i].plane.ySegment = $('#room_content_node' + i + '_plane_ySegment').val();
+            room.content.node[i].plane.numTexCoordSets = $('#room_content_node' + i + '_plane_numTexCoordSets').val();
+            room.content.node[i].plane.uTile = $('#room_content_node' + i + '_plane_uTile').val();
+            room.content.node[i].plane.vTile = $('#room_content_node' + i + '_plane_vTile').val();
+            room.content.node[i].plane.normals = $('#room_content_node' + i + '_plane_normals').val();
+            room.content.node[i].plane.tangents = $('#room_content_node' + i + '_plane_tangents').val();
+            room.content.node[i].plane.castShadows = $('#room_content_node' + i + '_plane_castShadows').val();
+            room.content.node[i].plane.normal.x = $('#room_content_node' + i + '_plane_normal_x').val();
+            room.content.node[i].plane.normal.y = $('#room_content_node' + i + '_plane_normal_y').val();
+            room.content.node[i].plane.normal.z = $('#room_content_node' + i + '_plane_normal_z').val();
+            room.content.node[i].plane.upVector.x = $('#room_content_node' + i + '_plane_upVector_x').val();
+            room.content.node[i].plane.upVector.y = $('#room_content_node' + i + '_plane_upVector_y').val();
+            room.content.node[i].plane.upVector.z = $('#room_content_node' + i + '_plane_upVector_z').val();
         }
     }
 }
@@ -876,7 +876,7 @@ function ContentCreation() {
                 '   <input class="nums" type="number" id="room_content_node' + i + '_plane_xSegment" value="' + room.content.node[i].plane.xSegment + '"><br>' +
                 '   <label>ySegment:</label>' +
                 '   <input class="nums" type="number" id="room_content_node' + i + '_plane_ySegment" value="' + room.content.node[i].plane.ySegment + '"><br>' +
-                '   <label>Nember of Texture Coordinates Sets:</label>' +
+                '   <label>NumTexCoordSets:</label>' +
                 '   <input class="nums" type="number" id="room_content_node' + i + '_plane_numTexCoordSets" value="' + room.content.node[i].plane.numTexCoordSets + '"><br>' +
                 '   <label>uTile:</label>' +
                 '   <input class="nums" type="number" id="room_content_node' + i + '_plane_uTile" value="' + room.content.node[i].plane.uTile + '"><br>' +
