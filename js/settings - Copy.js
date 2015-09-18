@@ -13,7 +13,7 @@ function Settings2Run() {
         $('#jstree').removeClass('hidden').addClass('shown');
         console.log("A room tartalma: " + room);
         room = JSON.parse(xhr2.response);
-
+        console.log(room.content.node[0].browser, room.content.node[0].figure, room.nodeTypes[0]);
         Initialing();
         ContentCreation();
         GetSettingsObject();
@@ -158,6 +158,7 @@ function Settings2Run() {
 
             document.getElementById('settings_site').innerHTML = "Thank you for using VirCA Room Converter!";
             download(room.roomName + ".room", data);
+            room = {};
         };
 
     };
@@ -232,6 +233,7 @@ function Initialing() {
         $('#presentation_fileName').val(room.settings.presentation.fileName);
         $('#presentation_enabled').val(room.settings.presentation.enabled);
     }
+
 
 
 
@@ -334,6 +336,7 @@ function GetContentObject() {
         room.content.node[i].pose.position.x = $('#content_node' + i + '_pose_position_x').val();
         room.content.node[i].pose.position.y = $('#content_node' + i + '_pose_position_y').val();
         room.content.node[i].pose.position.z = $('#content_node' + i + '_pose_position_z').val();
+        console.log("A node type: "+room.nodeTypes[i]);
         //---------pose_orientation--------
         if ($('#node' + i + '_pose_orientation').val() == "q") {
             room.content.node[i].pose.orientation.quaternion.x = $('#node' + i + '_pose_orientation_qx').val();
@@ -375,14 +378,15 @@ function GetContentObject() {
             room.content.node[i].pose.orientation.quaternion.z = undefined;
             room.content.node[i].pose.orientation.quaternion.w = undefined;
         }
-        room.content.node[i].scale.x = $('#room_content_node' + i + '_scale_x').val();
-        room.content.node[i].scale.y = $('#room_content_node' + i + '_scale_y').val();
-        room.content.node[i].scale.z = $('#room_content_node' + i + '_scale_z').val();
+
+            room.content.node[i].scale.x = $('#room_content_node' + i + '_scale_x').val();
+            room.content.node[i].scale.y = $('#room_content_node' + i + '_scale_y').val();
+            room.content.node[i].scale.z = $('#room_content_node' + i + '_scale_z').val();
         //--------------types-----------
         if (room.nodeTypes[i] == "node") {
             room.content.node[i].entity.meshFileName = $('#room_content_node' + i + '_entity_meshFileName').val();
             room.content.node[i].entity.castShadows = $('#room_content_node' + i + '_entity_castShadows').val();
-           
+            
         }
         else if (room.nodeTypes[i] == "browser") {
             room.content.node[i].browser.url = $('#room_content_node' + i + '_browser_url').val();
@@ -614,7 +618,7 @@ function ContentCreation() {
         $('#content_node' + i).append(
                 '<div class="second">' +
                 '   <label>Scales:</label><br>' +
-                '       <div class ="third">' +
+                '       <div class ="third  ">' +
                 '           <label>x:</label>' +
                 '           <input class="nums" type="number" id="room_content_node' + i + '_scale_x" value="' + room.content.node[i].scale.x + '"><br>' +
                 '           <label>y:</label>' +
@@ -930,7 +934,72 @@ function ContentCreation() {
         }
 
 
+         // console.log(room.content.node[i].plane);
 
+         // console.log(room.content.node[i].plane);
+    }
+}
 
+function EliminateAllProperties(){
+     $('#roomName').val(room.roomName);
+    //-----------------environment----------------
+    if (room.settings.environment.skybox != undefined) {
+        $('#environment_skybox_materialName').val("");
+        $('#environment_skybox_distance').val("");
+
+    }
+    //console.log(room.settings.environment.skybox.distance);
+    $('#environment_ambientColor_r').val("");
+    $('#environment_ambientColor_g').val("");
+    $('#environment_ambientColor_b').val("");
+    $('#environment_ambientColor_a').val("");
+    $('#environment_backgroundColor_r').val("");
+    $('#environment_backgroundColor_g').val(room.settings.environment.backgroundColor.g);
+    $('#environment_backgroundColor_b').val(room.settings.environment.backgroundColor.b);
+    $('#environment_backgroundColor_a').val(room.settings.environment.backgroundColor.a);
+    $('#environment_shader').val(room.settings.environment.shader);
+    $('#environment_compositors_bloom').val(room.settings.environment.compositors.Bloom);
+    $('#environment_compositors_motionBlur').val(room.settings.environment.compositors.MotionBlur);
+    $('#environment_fog_type').val(room.settings.environment.fog.type);
+    $('#environment_fog_color_r').val(room.settings.environment.fog.color.r);
+    $('#environment_fog_color_g').val(room.settings.environment.fog.color.g);
+    $('#environment_fog_color_b').val(room.settings.environment.fog.color.b);
+    $('#environment_fog_color_a').val(room.settings.environment.fog.color.a);
+    $('#environment_fog_linearStart').val(room.settings.environment.fog.linearStart);
+    $('#environment_fog_linearStop').val(room.settings.environment.fog.linearStop);
+    $('#environment_fog_expDensity').val(room.settings.environment.fog.expDensity);
+    //-----------------pointer----------------
+    $('#pointer_visibility').val(room.settings.pointer.visibility);
+    $('#pointer_crosshairs').val(room.settings.pointer.crosshairs);
+    $('#pointer_length').val(room.settings.pointer.length);
+    if (room.settings.pointer.offset != undefined) {
+        $('#camera_pointer_offset_x').val(room.settings.pointer.offset.x);
+        $('#camera_pointer_offset_y').val(room.settings.pointer.offset.y);
+        $('#camera_pointer_offset_z').val(room.settings.pointer.offset.z);
+    }
+    //-----------------boundaries----------------
+    $('#boundaries_xLimit_min').val(room.settings.boundaries.xlimit.min);
+    $('#boundaries_xLimit_max').val(room.settings.boundaries.xlimit.max);
+    $('#boundaries_yLimit_min').val(room.settings.boundaries.ylimit.min);
+    $('#boundaries_yLimit_max').val(room.settings.boundaries.ylimit.max);
+    $('#boundaries_zLimit_min').val(room.settings.boundaries.zlimit.min);
+    $('#boundaries_zLimit_max').val(room.settings.boundaries.zlimit.max);
+    //-----------------camera----------------
+    $('#camera_pose_position_x').val(room.settings.camera.pose.position.x);
+    $('#camera_pose_position_y').val(room.settings.camera.pose.position.y);
+    $('#camera_pose_position_z').val(room.settings.camera.pose.position.z);
+    $('#camera_pose_orientation_qx').val(room.settings.camera.pose.orientation.quaternion.x);
+    $('#camera_pose_orientation_qy').val(room.settings.camera.pose.orientation.quaternion.y);
+    $('#camera_pose_orientation_qz').val(room.settings.camera.pose.orientation.quaternion.z);
+    $('#camera_pose_orientation_qw').val(room.settings.camera.pose.orientation.quaternion.w);
+    $('#camera_clipping_near').val(room.settings.camera.clipping.near);
+    $('#camera_clipping_far').val(room.settings.camera.clipping.far);
+    $('#camera_fov').val(room.settings.camera.fov);
+    //-----------------browserStartPage----------------
+    $('#browserStartPage_url').val(room.settings.browserStartPage.url);
+    //-----------------presentation----------------
+    if (room.settings.presentation != undefined) {
+        $('#presentation_fileName').val(room.settings.presentation.fileName);
+        $('#presentation_enabled').val(room.settings.presentation.enabled);
     }
 }

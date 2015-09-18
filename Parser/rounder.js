@@ -1,9 +1,9 @@
 module.exports = function (settings, content, nodeTypes) {
     //environment
-    if (settings.environment.skybox != undefined) {
+    if (settings.environment.skybox != undefined && settings.environment.skybox.distance != "") {
         settings.environment.skybox.distance = rounding3(settings.environment.skybox.distance);
     }
-    if (settings.environment.ambientColor.r  != undefined && settings.environment.ambientColor.g != undefined && settings.environment.ambientColor.b  != undefined && settings.environment.ambientColor.a != undefined) {
+    if (settings.environment.ambientColor != undefined && settings.environment.ambientColor.r  != "" && settings.environment.ambientColor.g != "" && settings.environment.ambientColor.b  != "" && settings.environment.ambientColor.a != "") {
         settings.environment.ambientColor.r = rounding5(settings.environment.ambientColor.r);
         settings.environment.ambientColor.g = rounding5(settings.environment.ambientColor.g);
         settings.environment.ambientColor.b = rounding5(settings.environment.ambientColor.b);

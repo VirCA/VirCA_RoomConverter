@@ -30,6 +30,7 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
     
     scfP.scfgParser(scfgFileName, SCFGobjectName, easyOgreExport);
     room.settings = scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
+   
     var fs = require('fs');
    
     fs.unlink("./" + SCENEroom, function (err) {
@@ -49,9 +50,12 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
             console.log(SCFGobjectName + " : Deleted successfully");
     });
 
+//console.log("4: "+room.settings.environment.skybox.distance);
     room.settings = rounder(room.settings, room.content).settings;
 
     room.content = rounder(room.settings, room.content).content;
+
+//console.log("5: "+room.settings.environment.skybox.distance);
 
     return room;
 }

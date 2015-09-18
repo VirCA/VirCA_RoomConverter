@@ -267,7 +267,11 @@ function nodeFigure(base){
 }
 
 function nodePlane(base){
-	base = cutContentFromBegining(base, "<plane", "</plane>");
+	if(base.indexOf("</plane>") >= 0){
+		base = cutContentFromBegining(base, "<plane", "</plane>");
+	}
+	else
+		base = cutContentFromBegining(base, "<plane", "/>");
 	var plane = {
 		name: undefined,
 		castShadows: undefined,
@@ -294,7 +298,8 @@ function nodePlane(base){
 			z: undefined
 		}
 	};
-	var pro_base = cutContentFromBegining(base, "<plane", ">");
+	var pro_base = cutContentFromBegining(base, "<plane", "/>");
+	//console.log(pro_base);
 
 	plane.name = nodeBase(pro_base, "name");
 	plane.castShadows = nodeBase(pro_base, "castShadows");
@@ -385,14 +390,14 @@ function lightAttenuation(base){
 		range: undefined,
 		constant: undefined,
 		linear: undefined,
-		quadritic: undefined
+		quadratic: undefined
 	};
 
 	lightAttenuation.mode = nodeBase(base, "mode");
 	lightAttenuation.range = nodeBase(base, "range");
 	lightAttenuation.constant = nodeBase(base, "constant");
 	lightAttenuation.linear = nodeBase(base, "linear");
-	lightAttenuation.quadritic = nodeBase(base, "quadritic");
+	lightAttenuation.quadratic = nodeBase(base, "quadratic");
 
 	return lightAttenuation;
 }
@@ -400,7 +405,10 @@ function lightAttenuation(base){
 
 
 function nodeBrowser(base){
-	base = cutContentFromBegining(base, "<browser", "</browser>");
+	if(base.indexOf("</browser>") >= 0)
+		base = cutContentFromBegining(base, "<browser", "</browser>");
+	else
+		base = cutContentFromBegining(base, "<browser", "/>");
 	var browser = {
 		isShared: undefined,
 		width: undefined,

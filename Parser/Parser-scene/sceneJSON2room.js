@@ -17,185 +17,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 		var i = 0;
 		while(i < fromJSON.length){
-			var node = {
-				"@": {
-					name: ""
-				},
-				"pose":{
-					"position":{
-						"x": "",
-						"y": "", 
-						"z": ""
-					},
-					"orientation":{
-						"ypr":{
-							"yaw": "",
-							"pitch": "",
-							"roll": ""
-						},
-						"angleAxis":{
-							"angle": "",
-							"axis" :{
-								"x": "",
-								"y": "",
-								"z": ""
-							}
-						},
-						"quaternion":{
-							"x": "",
-							"y": "",
-							"z": "",
-							"w": ""
-						},
-						"rotMatrix":{
-							"xx":"",
-							"xy":"",
-							"xz":"",
-							"yx":"",
-							"yy":"",
-							"yz":"",
-							"zx":"",
-							"zy":"",
-							"zz":""
-						}
-					}
-				},
-				"scale":{
-					"x": "",
-					"y": "",
-					"z": ""
-				},
-				"entity":{
-					"meshFileName": "",
-					"castShadows": ""
-				},
-				"browser":{
-					"url": "",
-					"shared": "",
-					"draggable": "",
-					"snappedToWall": "",
-					"width": "",
-                    "height": "",
-                    "resH": "",
-                    "resV": "",
-					"zoom": ""
-				},
-				"figure":{
-					"width": "",
-					"height": "",
-					"materialName": "",
-					"draggable": "",
-					"castShadows": ""
-				},
-				"plane":{
-					"width": "",
-					"height": "",
-					"materialName": "",
-					"movablePlane": "",
-					"distance": "",
-					"xSegment": "",
-					"ySegment": "",
-					"numTexCoordSets": "",
-					"uTile": "",
-					"vTile": "",
-					"normals": "",
-					"tangents": "",
-					"castShadows": "",
-					"normal": {
-						"x": "",
-						"y": "",
-						"z": ""
-					},
-					"upVector": {
-						"x": "",
-						"y": "",
-						"z": ""
-					}
-				},
-				"light":{
-					"offset":{
-						"x": "",
-						"y": "",
-						"z": ""
-					},
-					"diffuse": {
-						"r": "",
-						"g": "",
-						"b": "",
-						"a": ""
-					},
-					"specular":{
-						"r": "",
-						"g": "",
-						"b": "",
-						"a": ""
-					},
-					"castShadows": "",
-					"type": {
-						"spot":{
-							"range":{
-								"inner": "",
-								"outer": "",
-								"falloff": ""
-							},
-							"attenuation":{
-								"range": "",
-								"manual":{
-									"constant":"",
-									"linear": "",
-									"quadratic": ""
-								},
-								"range": "",
-								"manual":{
-									"constant": "",
-									"linear": "",
-									"quadratic": ""
-								},
-								"range": "",
-								"manual":{
-									"constant": "",
-									"linear": "",
-									"quadratic": ""
-								},
-							},
-							"direction": {
-								"x": "",
-								"y": "",
-								"z": ""
-							}
-						},
-						"directional":{
-							"direction":{
-								"x": "",
-								"y": "",
-								"z": ""
-							}
-						},
-						"point":{
-							"attenuation":{
-								"range": "",
-								"manual":{
-									"constant": "",
-									"linear": "",
-									"quadratic": ""
-								},
-								"range": "",
-								"manual":{
-									"constant": "",
-									"linear": "",
-									"quadratic": ""
-								},
-								"range": "",
-								"manual":{
-									"constant": "",
-									"linear": "",
-									"quadratic": ""
-								},
-							}
-						}
-					}
-				}
-			}
+			
+			var node = require("./sceneObject.js")();
 			if(fromJSON[i].mainType == "node"){
 				node['@'].name = fromJSON[i].detail.name;
 
@@ -234,28 +57,25 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				//console.log(fromJSON[i].entity.details.meshFile);
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
-				if(fromJSON[i].plane != undefined){
-					if(fromJSON[i].plane.width.toString().indexOf(".") >=0)
-						fromJSON[i].plane.width = fromJSON[i].plane.width.toString().substring(0, fromJSON[i].plane.width.indexOf("."));
-					if(fromJSON[i].plane.height.toString().indexOf(".") >=0)
-						fromJSON[i].plane.height = fromJSON[i].plane.height.toString().substring(0, fromJSON[i].plane.height.indexOf("."));
+				//console.log(fromJSON[i].plane)
+				if(fromJSON[i].plane != undefined && fromJSON[i].plane.width != undefined && fromJSON[i].plane.height != undefined){
 
-					node.plane.width = fromJSON[i].plane.width;
-					node.plane.height = fromJSON[i].plane.height;
-					node.plane.materialName = fromJSON[i].plane.material;
-					node.plane.movablePlane = fromJSON[i].plane.movablePlane;
-					node.plane.distance = fromJSON[i].plane.distance;
-					node.plane.xSegment = fromJSON[i].plane.xSegments;
+					node.plane.width = fromJSON[i].plane.width; //done
+					node.plane.height = fromJSON[i].plane.height;//done
+					node.plane.materialName = fromJSON[i].plane.material;//done
+					node.plane.movablePlane = fromJSON[i].plane.movablePlane;//done
+					node.plane.distance = fromJSON[i].plane.distance;//done
+					node.plane.xSegment = fromJSON[i].plane.xSegments;//done
 					//console.log("xseg: "+ node.plane.xSegment);
-					node.plane.ySegment = fromJSON[i].plane.ySegments;
+					node.plane.ySegment = fromJSON[i].plane.ySegments;//done
 
 					//console.log("yseg: "+ node.plane.ySegment);
-					node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;
-					node.plane.uTile = fromJSON[i].plane.uTile;
-					node.plane.vTile = fromJSON[i].plane.vTile;
-					node.plane.normals = fromJSON[i].plane.normals;
-					node.plane.castShadows = fromJSON[i].plane.castShadows;
-					node.plane.tangents = fromJSON[i].plane.tangents;
+					node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;//done
+					node.plane.uTile = fromJSON[i].plane.uTile;//done
+					node.plane.vTile = fromJSON[i].plane.vTile;//done
+					node.plane.normals = fromJSON[i].plane.normals;//done
+					node.plane.castShadows = fromJSON[i].plane.castShadows;//done
+					node.plane.tangents = fromJSON[i].plane.tangents;//done
 
 					node.plane.normal.x = fromJSON[i].plane.normal.x;
 					node.plane.normal.y = fromJSON[i].plane.normal.y;
@@ -383,7 +203,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 					node.light.type.spot.direction.y = fromJSON[i].direction.y;
                     node.light.type.spot.direction.z = fromJSON[i].direction.z;
 
-                    if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y || fromJSON[i].direction.z) {
+                    //console.log(fromJSON[i].direction);
+                    if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y == undefined|| fromJSON[i].direction.z == undefined) {
                         node.light.type.spot.direction.x = 0;
                         node.light.type.spot.direction.y = 0;
                         node.light.type.spot.direction.z = 1;

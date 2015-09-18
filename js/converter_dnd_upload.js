@@ -9,12 +9,12 @@
         var roomName = "";
         var data = "";
         var easyOgreExport;
-        
+        var ifEasyOgr ="";
 
         (function () {         
             var upload = function (files) {
                 
-                
+
                 smt.onclick = function () {
 
                     var formData = new FormData();
@@ -25,6 +25,9 @@
                     easyOgreExport = document.getElementById('scales');
                     if(easyOgreExport.checked)
                         formData.append('easyOgreExport', "on");
+                    else if(ifEasyOgr == "justDefault"){
+                        formData.append('easyOgreExport', ifEasyOgr);
+                    }
                     if (files != undefined) {
                         //console.log(files);
                         xhr.open('post', '/upload');
@@ -76,6 +79,7 @@
                     right.textContent = files[1].name;
                     document.getElementById('dNdtext').textContent = "";
                    // console.log(files);
+                    console.log(ifEasyOgr+" : beléptemasdfasdf");
                     upload(files);
                 }
                 else if (files[0] != undefined && files[1] == undefined) {
@@ -83,6 +87,7 @@
                     left.textContent = files[0].name;
                     right.className = '';
                     right.textContent = '';
+                    ifEasyOgr = "justDefault";
                     document.getElementById('dNdtext').textContent = "";
                     //console.log(files);
                     upload(files);

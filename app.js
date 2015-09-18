@@ -147,7 +147,6 @@ server.route([{
         method: 'POST',
         path: '/builder',
         handler: function (request, reply){
-            console.log("Ittvagyok");
             reply(room);
         }
     },
@@ -156,11 +155,8 @@ server.route([{
         path: '/roomgenerator',
         config: {
             handler: function (request, reply) {
-                console.log("roomgenerator");
                 var myRoomObj = JSON.parse(request.payload.room);
                 var myGeneratedRoom = roomGenerator(myRoomObj);
-                console.log("yee");
-                //console.log(myGeneratedRoom);
                 fs.writeFile('te.txt', myGeneratedRoom);
                 reply(myGeneratedRoom);
             },
@@ -230,7 +226,6 @@ server.route([{
                     
                     room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
-                    console.log(room.content.node[10].plane.width);
                     reply(fs.readFileSync('./settings.html'));
                     console.log("\n");
                 }
