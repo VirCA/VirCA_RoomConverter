@@ -40,9 +40,9 @@
                             console.log("Convertation done.");
                             //window.open("/settings.html");
                             document.getElementById('settings_site').innerHTML = this.responseText;
-                    Settings2Run();
+                            Settings2Run();
                         }
-                formData = undefined;
+                        formData = undefined;
                          
                        // console.log(xhr);
                     }
@@ -79,7 +79,7 @@
                     right.textContent = files[1].name;
                     document.getElementById('dNdtext').textContent = "";
                    // console.log(files);
-                    console.log(ifEasyOgr+" : beléptemasdfasdf");
+                    //console.log(ifEasyOgr+" : beléptemasdfasdf");
                     upload(files);
                 }
                 else if (files[0] != undefined && files[1] == undefined) {

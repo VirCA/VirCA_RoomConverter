@@ -4,7 +4,7 @@
 		<environment>
 			<skybox>
 				<materialName>test1</materialName>
-				<distance>11</distance>
+				<distance>0</distance>
 			</skybox>
 			<ambientColor>
 				<r>0.1</r>
@@ -221,6 +221,8 @@
 				<snappedToWall>true</snappedToWall>
 				<width>201</width>
 				<height>202</height>
+				<resH>203</resH>
+				<resV>204</resV>
 				<zoom>0</zoom>
 			</browser>
 		</node>

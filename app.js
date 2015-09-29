@@ -197,7 +197,7 @@ server.route([{
                     room = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
                     reply(fs.readFileSync('./settings.html'));
-                    console.log("\n");
+                    //console.log("\n");
                 }
                 else if (file.length == 2) {
                     var SCENE_file_name = "";
@@ -227,7 +227,7 @@ server.route([{
                     room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
                     room.roomName = roomFN;
                     reply(fs.readFileSync('./settings.html'));
-                    console.log("\n");
+                    //console.log("\n");
                 }
                 else {
                     reply("ERROR: You selected more than two file, or the extensions were wrong.");

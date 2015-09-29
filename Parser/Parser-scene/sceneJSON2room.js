@@ -109,7 +109,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 				node.browser.width = fromJSON[i].browser.width;
                 node.browser.height = fromJSON[i].browser.height;
-                if (fromJSON[i].browser.resolution_w != undefined) {
+                if (fromJSON[i].browser.resolution_w != undefined && fromJSON[i].browser.resolution_h != undefined) {
                     node.browser.resV = fromJSON[i].browser.resolution_h;
                     node.browser.resH = fromJSON[i].browser.resolution_w;
                 }

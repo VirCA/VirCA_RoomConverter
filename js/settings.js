@@ -30,7 +30,7 @@ function Settings2Run() {
 
 
     $('#jstree').on('changed.jstree', function (e, data) {
-        console.log("Changed");
+        //console.log("Changed");
 
         switch (data.node.text) {
             case 'room': $('#RN').removeClass('hidden').addClass('shown');
@@ -65,7 +65,7 @@ function Settings2Run() {
         for (var i = 0; i < room.nodeTypes.length; i++) {
             if (data.node.text == room.content.node[i]['@'].name) {
                 var tmp = '#content_node' + i;
-                console.log()
+               // console.log()
                 $('#content').removeClass("hidden").addClass("shown");
                 $(tmp).removeClass("hidden").addClass("shown");
             }
@@ -162,7 +162,7 @@ function Settings2Run() {
 
     };
     $('#jstree').on('select_node.jstree', function (e, data) {
-        console.log("Selected");
+       // console.log("Selected");
         HideAll();
 
     });

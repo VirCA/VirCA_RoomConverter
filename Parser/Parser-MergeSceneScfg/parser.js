@@ -56,6 +56,6 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
     room.content = rounder(room.settings, room.content).content;
 
 //console.log("5: "+room.settings.environment.skybox.distance);
-
+    console.log("\n");
     return room;
 }

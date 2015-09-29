@@ -4,7 +4,7 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
 	var js2xml = require('js2xmlparser');
 	var fs = require('fs');
     var settings = require("./settingsObject.js")(); 
-    console.log(settings);
+    //console.log(settings);
     if (easyOgreExport == undefined) {
         //------------------------------------------LIGHT-----------------------------------------------
         if (fromJSON.light.skybox.materialName != undefined)
@@ -12,6 +12,9 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         
         if (fromJSON.light.skybox.distance != undefined)
             settings.environment.skybox.distance = fromJSON.light.skybox.distance;
+        if(fromJSON.light.skybox.materialName != undefined && (fromJSON.light.skybox.distance == undefined || fromJSON.light.skybox.distance == "")){
+            settings.environment.skybox.distance = 1000;
+        }
 
    // console.log("2from: "+fromJSON.light.skybox.distance+"  3nemfrom: "+settings.environment.skybox.distance); // 
         //--------------------------------------light.ambientcolor---------------------------------------------------
