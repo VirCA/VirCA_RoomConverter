@@ -155,22 +155,20 @@ else if (nodeBaseDetails(base).name != undefined && nodeBaseDetails(base).name.t
     node.browser.isSnap2Wall = "true";
     var tmp = node.detail.name;
     if (tmp.indexOf("_w_") >= 0 && tmp.indexOf("_h_") >= 0) {
-        node.browser.width = getContentBetweenUnderline(tmp, "_w");// ideiglenes
-        node.browser.height = getContentBetweenUnderline(tmp,"_h");
-        //console.log("Height: "+ node.browser.height + "\nWidth: "+ node.browser.width);
-        node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + getContentBetweenUnderline(tmp,"_brw");
+        node.browser.width = tmp.substring(tmp.indexOf("_w_")+3, tmp.indexOf("_h_"));// ideiglenes
+        node.browser.height = tmp.substring(tmp.indexOf("_h_") + 3);
+        node.browser.resolution_w = tmp.substring(tmp.indexOf("_resH_") + 6, tmp.indexOf("_resV_"));
+        node.browser.resolution_h = tmp.substring(tmp.indexOf("_resV_") + 6);
+        node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + tmp.substring(tmp.indexOf("_brw_") + 5, tmp.indexOf("_w_"));
         node.browser.zoom = 0;
     }
     else {
         node.browser.width = 200;// ideiglenes
         node.browser.height = 160;
-        node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + getContentBetweenUnderline(tmp,"_brw");
+        node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + tmp.substring(tmp.indexOf("_brw_")+5);
         node.browser.zoom = 0;
     }
-	if(tmp.indexOf("_resH_") >= 0 && tmp.indexOf("_resV") >= 0){
-        node.browser.resolution_w = getContentBetweenUnderline(tmp, "resH");
-        node.browser.resolution_h = getContentBetweenUnderline(tmp,"_resV");
-	}
+
     
 
 }
@@ -631,14 +629,6 @@ function getContentBetweenMarks(base, prop){ //Get string from the first mark to
 	base = base.substring(base.indexOf(prop));
 	base = base.substring(base.indexOf("\"")+1);
 	base = base.substring(0, base.indexOf("\""));
-	//console.log("Marks: "+ base); // Working!
-	return base;
-}
-
-function getContentBetweenUnderline(base, prop){ //Get string from the first mark to the next one
-	base = base.substring(base.indexOf(prop) + prop.length);
-	base = base.substring(base.indexOf("_")+1);
-	base = base.substring(0, base.indexOf("_"));
 	//console.log("Marks: "+ base); // Working!
 	return base;
 }

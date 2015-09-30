@@ -35,7 +35,7 @@ module.exports = function(){
         pointer: {
             visibility: "false",
             crosshairs: "true",
-            length: "0",
+            length: "180",
             offset: {
                 x: "0",
                 y: "-20",
