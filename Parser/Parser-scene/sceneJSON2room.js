@@ -10,189 +10,15 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 
 		var str = "";
 
-		var nodes = [];
+    var nodes = [];
+    var nodesType = [];
+    var lightType = [];
+    var p = 0;
 
 		var i = 0;
 		while(i < fromJSON.length){
-			var node = {
-				"@": {
-					name: undefined
-				},
-				"pose":{
-					"position":{
-						"x": undefined,
-						"y": undefined, 
-						"z": undefined
-					},
-					"orientation":{
-						"ypr":{
-							"yaw": undefined,
-							"pitch": undefined,
-							"roll": undefined
-						},
-						"angleAxis":{
-							"angle": undefined,
-							"axis" :{
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
-							}
-						},
-						"quaternion":{
-							"x": undefined,
-							"y": undefined,
-							"z": undefined,
-							"w": undefined
-						},
-						"rotMatrix":{
-							"xx":undefined,
-							"xy":undefined,
-							"xz":undefined,
-							"yx":undefined,
-							"yy":undefined,
-							"yz":undefined,
-							"zx":undefined,
-							"zy":undefined,
-							"zz":undefined
-						}
-					}
-				},
-				"scale":{
-					"x": undefined,
-					"y": undefined,
-					"z": undefined
-				},
-				"entity":{
-					"meshFileName": undefined,
-					"castShadows": undefined
-				},
-				"browser":{
-					"url": undefined,
-					"shared": undefined,
-					"draggable": undefined,
-					"snappedToWall": undefined,
-					"width": undefined,
-					"height": undefined,
-					"resH": undefined,
-					"resV": undefined,
-					"zoom": undefined
-				},
-				"figure":{
-					"width": undefined,
-					"height": undefined,
-					"materialName": undefined,
-					"draggable": undefined,
-					"castShadows": undefined
-				},
-				"plane":{
-					"width": undefined,
-					"height": undefined,
-					"materialName": undefined,
-					"movablePlane": undefined,
-					"distance": undefined,
-					"xSegment": undefined,
-					"ySegment": undefined,
-					"numTexCoordSets": undefined,
-					"uTile": undefined,
-					"vTile": undefined,
-					"normals": undefined,
-					"tangents": undefined,
-					"castShadows": undefined,
-					"normal": {
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
-					},
-					"upVector": {
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
-					}
-				},
-				"light":{
-					"offset":{
-						"x": undefined,
-						"y": undefined,
-						"z": undefined
-					},
-					"diffuse": {
-						"r": undefined,
-						"g": undefined,
-						"b": undefined,
-						"a": undefined
-					},
-					"specular":{
-						"r": undefined,
-						"g": undefined,
-						"b": undefined,
-						"a": undefined
-					},
-					"castShadows": undefined,
-					"type": {
-						"spot":{
-							"range":{
-								"inner": undefined,
-								"outer": undefined,
-								"falloff": undefined
-							},
-							"attenuation":{
-								"range": undefined,
-								"manual":{
-									"constant":undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-								"range": undefined,
-								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-								"range": undefined,
-								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-							},
-							"direction": {
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
-							}
-						},
-						"directional":{
-							"direction":{
-								"x": undefined,
-								"y": undefined,
-								"z": undefined
-							}
-						},
-						"point":{
-							"attenuation":{
-								"range": undefined,
-								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-								"range": undefined,
-								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-								"range": undefined,
-								"manual":{
-									"constant": undefined,
-									"linear": undefined,
-									"quadratic": undefined
-								},
-							}
-						}
-					}
-				}
-			}
+			
+			var node = require("./sceneObject.js")();
 			if(fromJSON[i].mainType == "node"){
 				node['@'].name = fromJSON[i].detail.name;
 
@@ -205,8 +31,11 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.scale.x =  fromJSON[i].scale.x;
 				node.scale.y =  fromJSON[i].scale.y,
 				node.scale.z =  fromJSON[i].scale.z;
-
-				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
+            
+                node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
+                if (node.entity.meshFileName == undefined) {
+                    node.entity.meshFileName = "";
+                }
 				//console.log(fromJSON[i].entity.details.meshFile);
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
 
@@ -228,32 +57,33 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				//console.log(fromJSON[i].entity.details.meshFile);
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
+				//console.log(fromJSON[i].plane)
+				if(fromJSON[i].plane != undefined && fromJSON[i].plane.width != undefined && fromJSON[i].plane.height != undefined){
 
-				if(fromJSON[i].plane.width.indexOf(".") >=0)
-					fromJSON[i].plane.width = fromJSON[i].plane.width.substring(0, fromJSON[i].plane.width.indexOf("."));
-				if(fromJSON[i].plane.height.indexOf(".") >=0)
-					fromJSON[i].plane.height = fromJSON[i].plane.height.substring(0, fromJSON[i].plane.height.indexOf("."));
+					node.plane.width = fromJSON[i].plane.width; //done
+					node.plane.height = fromJSON[i].plane.height;//done
+					node.plane.materialName = fromJSON[i].plane.material;//done
+					node.plane.movablePlane = fromJSON[i].plane.movablePlane;//done
+					node.plane.distance = fromJSON[i].plane.distance;//done
+					node.plane.xSegment = fromJSON[i].plane.xSegments;//done
+					//console.log("xseg: "+ node.plane.xSegment);
+					node.plane.ySegment = fromJSON[i].plane.ySegments;//done
 
-				node.plane.width = fromJSON[i].plane.width;
-				node.plane.height = fromJSON[i].plane.height;
-				node.plane.materialName = fromJSON[i].plane.material;
-				node.plane.movablePlane = fromJSON[i].plane.movablePlane;
-				node.plane.distance = fromJSON[i].plane.distance;
-				node.plane.xSegment = fromJSON[i].plane.xSegments;
-				node.plane.ySegment = fromJSON[i].plane.ySegments;
-				node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;
-				node.plane.uTile = fromJSON[i].plane.uTile;
-				node.plane.vTile = fromJSON[i].plane.vTile;
-				node.plane.normals = fromJSON[i].plane.normals;
-				node.plane.castShadows = fromJSON[i].plane.castShadows;
-				node.plane.tangents = fromJSON[i].plane.tangents;
+					//console.log("yseg: "+ node.plane.ySegment);
+					node.plane.numTexCoordSets = fromJSON[i].plane.numTexCoordSets;//done
+					node.plane.uTile = fromJSON[i].plane.uTile;//done
+					node.plane.vTile = fromJSON[i].plane.vTile;//done
+					node.plane.normals = fromJSON[i].plane.normals;//done
+					node.plane.castShadows = fromJSON[i].plane.castShadows;//done
+					node.plane.tangents = fromJSON[i].plane.tangents;//done
 
-				node.plane.normal.x = fromJSON[i].plane.normal.x;
-				node.plane.normal.y = fromJSON[i].plane.normal.y;
-				node.plane.normal.z = fromJSON[i].plane.normal.z;
-				node.plane.upVector.x = fromJSON[i].plane.upVector.x;
-				node.plane.upVector.y = fromJSON[i].plane.upVector.y;
-				node.plane.upVector.z = fromJSON[i].plane.upVector.z;
+					node.plane.normal.x = fromJSON[i].plane.normal.x;
+					node.plane.normal.y = fromJSON[i].plane.normal.y;
+					node.plane.normal.z = fromJSON[i].plane.normal.z;
+					node.plane.upVector.x = fromJSON[i].plane.upVector.x;
+					node.plane.upVector.y = fromJSON[i].plane.upVector.y;
+					node.plane.upVector.z = fromJSON[i].plane.upVector.z;
+				}
 			}
 			else if(fromJSON[i].mainType == "browser"){
 				node['@'].name = fromJSON[i].detail.name;
@@ -276,16 +106,13 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.browser.shared = fromJSON[i].browser.isShared;
 				node.browser.draggable = fromJSON[i].browser.isDraggable;
 				node.browser.snappedToWall = fromJSON[i].browser.isSnap2Wall;
-				
 
 				node.browser.width = fromJSON[i].browser.width;
-				node.browser.height = fromJSON[i].browser.height;
-
-				if(fromJSON[i].browser.resolution_w != undefined)
-				{
-					node.browser.resV = fromJSON[i].browser.resolution_h;
-					node.browser.resH = fromJSON[i].browser.resolution_w;
-				}
+                node.browser.height = fromJSON[i].browser.height;
+                if (fromJSON[i].browser.resolution_w != undefined && fromJSON[i].browser.resolution_h != undefined) {
+                    node.browser.resV = fromJSON[i].browser.resolution_h;
+                    node.browser.resH = fromJSON[i].browser.resolution_w;
+                }
 				node.browser.zoom = fromJSON[i].browser.zoom;
 			}
 			else if(fromJSON[i].mainType == "figure"){
@@ -304,11 +131,6 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				node.entity.meshFileName = fromJSON[i].entity.details.meshFile;
 				node.entity.castShadows = fromJSON[i].entity.details.castShadows;
 
-				if(fromJSON[i].figure.width.toString().indexOf(".") >=0)
-					fromJSON[i].figure.width = fromJSON[i].figure.width.substring(0, fromJSON[i].figure.width.indexOf("."));
-				if(fromJSON[i].figure.height.toString().indexOf(".") >=0)
-					fromJSON[i].figure.height = fromJSON[i].figure.height.substring(0, fromJSON[i].figure.height.indexOf("."));
-
 				node.figure.width = fromJSON[i].figure.width;
 				node.figure.height = fromJSON[i].figure.height;
 				node.figure.materialName = fromJSON[i].figure.material;
@@ -319,7 +141,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 			}
 			else if(fromJSON[i].mainType == "light"){
 				node['@'].name = fromJSON[i].name;
-            
+                lightType[p] = fromJSON[i].type;
+                ++p;
                 node.pose.position.x = fromJSON[i].position.x;
 				node.pose.position.y = fromJSON[i].position.y;
                 node.pose.position.z = fromJSON[i].position.z;
@@ -380,7 +203,8 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 					node.light.type.spot.direction.y = fromJSON[i].direction.y;
                     node.light.type.spot.direction.z = fromJSON[i].direction.z;
 
-                    if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y || fromJSON[i].direction.z) {
+                    //console.log(fromJSON[i].direction);
+                    if (fromJSON[i].direction.x == undefined || fromJSON[i].direction.y == undefined|| fromJSON[i].direction.z == undefined) {
                         node.light.type.spot.direction.x = 0;
                         node.light.type.spot.direction.y = 0;
                         node.light.type.spot.direction.z = 1;
@@ -421,8 +245,9 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
        
 			
 			str += js2xml("node", node) + "\n";
-			nodes.push(node);
-			++i;
+        nodes.push(node);
+        nodesType.push(fromJSON[i].mainType);
+        ++i;
 
 		}
 		
@@ -454,6 +279,17 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 			else
 				console.log("\nYour .room file has written succesfully!");
 		});*/
+    var completeObject = {
+        nodes: [],
+        nodesType: [],
+        lightType: []
+    };
+
+    completeObject.nodes = nodes;
+    completeObject.nodesType = nodesType;
+    completeObject.lightType = lightType;
+
+    return completeObject;
 	}
 
 	function rotation(object){
@@ -529,3 +365,7 @@ exports.sceneJSON2room = function(filename, objectName, roomName){
 				}
 				return;
 	}
+
+function rounding(str) {
+    return (Math.round(parseFloat(str.toString()) * 1000) / 1000).toString();
+}

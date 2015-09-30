@@ -13,28 +13,26 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
     var SCENEroom = Date.now() + "scene.room";
     var SCFGroom = Date.now() + "scfg.room";
 
+    var rounder = require("../rounder.js");
+
     sceP.sceneParser(sceneFileName, easyOgreExport, SCENEobjectName);
-    sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    var room = {
+        settings: {},
+        content: {
+            node:[]
+        }
+    }
+
+    tmpObj = sceJ2R.sceneJSON2room(roomFilename, SCENEobjectName, SCENEroom);
+    room.content.node = tmpObj.nodes;
+    room.nodeTypes = tmpObj.nodesType;
+    room.lightType = tmpObj.lightType;
     
     scfP.scfgParser(scfgFileName, SCFGobjectName, easyOgreExport);
-    scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
-    
+    room.settings = scfJ2r.scfgJSON2room(roomFilename, SCFGobjectName, SCFGroom, easyOgreExport);
+   
     var fs = require('fs');
-    
-    var scene = fs.readFileSync("./" + SCENEroom).toString();
-    var scfg = fs.readFileSync("./" + SCFGroom).toString();
-    
-    scene = scene.replace(/\n/gim, "\n\t");
-    scene = "\t" + scene;
-    scfg = scfg.replace(/\n/gim, "\n\t");
-    scfg = "\t" + scfg;
-    var room = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<room name=\"" + roomFilename + "\" version=\"" + version + "\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" + scfg + "\n" + scene + "\n</room>";
-    room = room.replace(/,/gim, ".");
-
-    //fs.writeFileSync(roomFilename + ".room", room);
-    var roomPath = "./uploads/rooms/" + Date.now() + roomFilename + ".room";
-    fs.writeFileSync(roomPath, room);
-
+   
     fs.unlink("./" + SCENEroom, function (err) {
         if (!err)
             console.log(SCENEroom + " : Deleted successfully");
@@ -51,5 +49,13 @@ module.exports = function (sceneFileName, scfgFileName, roomFilename, version, e
         if (!err)
             console.log(SCFGobjectName + " : Deleted successfully");
     });
-    return roomPath;
+
+//console.log("4: "+room.settings.environment.skybox.distance);
+    room.settings = rounder(room.settings, room.content).settings;
+
+    room.content = rounder(room.settings, room.content).content;
+
+//console.log("5: "+room.settings.environment.skybox.distance);
+    console.log("\n");
+    return room;
 }

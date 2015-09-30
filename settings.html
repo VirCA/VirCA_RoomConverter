@@ -1,0 +1,314 @@
+﻿
+    <header>
+        <p>On this page, you can modify your room properties. You can select each tag you would like to, and change it's value. After you finish, you need to click on "Generate and Download Room File" button to get your room file.</p>
+    </header>
+    <div>
+        <div class="plane">
+            <p class="centered"> Select the property you would like to change</p>
+            <div id="jstree"></div>
+
+        </div>
+
+        <div class="plane">
+
+            <p class="centered">
+                The Selected Property
+            </p>
+            <div class="settings-zone">
+                <!--FIRST-->
+                <div id="RN" class="first hidden">
+                    <label>Room name:</label>
+                    <input class="tex" type="text" id="roomName" value=""><br>
+                </div>
+                <div id="settings">
+                    <!--FIRST-->
+                    <div id="environment" class="first hidden">
+                        <label>Environment:</label><br>
+                        <div id="skybox" class="second">
+                            <label>Skybox</label>
+                            <div class="third">
+                                <label> Material Name:</label>
+                                <input class="tex" type="text" id="environment_skybox_materialName" value=""><br>
+                                <label> Distance:</label>
+                                <input class="tex" type="text" id="environment_skybox_distance" value=""><br>
+                            </div>
+                        </div>
+                        <div id="environment_ambientColor" class="second">
+                            <label>Ambient Color:</label>
+                            <div class="third">
+                                <label>r: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_r"><br>
+                                <label>g: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_g"><br>
+                                <label>b: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_b"><br>
+                                <label>a: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_ambientColor_a"><br>
+                            </div>
+                        </div>
+                        <div id="environment_backgroundColor" class="second">
+                            <label>Background Color:</label>
+                            <div class="third">
+                                <label>r: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_r"><br>
+                                <label>g: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_g"><br>
+                                <label>b: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_b"><br>
+                                <label>a: </label>
+                                <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_backgroundColor_a"><br>
+                            </div>
+                        </div>
+                        <div id="shadow" class="second ">
+                            <label>Shader:</label>
+                            <select class="tex" id="environment_shader">
+                                <option value=""></option>
+                                <option value="NONE">NONE</option>
+                                <option value="DAVE">DAVE</option>
+                                <option value="STENCIL">STENCIL</option>
+                                <option value="RTSS">RTSS</option>
+                            </select>
+                        </div>
+                        <div class="second">
+                            <label>Compositors</label>
+                            <div class="third">
+                                <label> Bloom:</label>
+                                <select class="tex" id="environment_compositors_bloom">
+                                    <option value=""></option>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
+                                </select><br>
+                                <label> Motion Blur:</label>
+                                <select class="tex" id="environment_compositors_motionBlur">
+                                    <option value=""></option>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="fog" class="second">
+                            <label>Fog:</label>
+                            <div class="third">
+                                <label>Type:</label>
+                                <select class="tex" id="environment_fog_type">
+                                    <option value=""></option>
+                                    <option value="NONE">NONE</option>
+                                    <option value="LINEAR">LINEAR</option>
+                                    <option value="EXP">EXP</option>
+                                    <option value="EXP2">EXP2</option>
+                                </select><br>
+                                <label>Color:</label>
+                                <div class="fourth">
+                                    <label>r: </label>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_r"><br>
+                                    <label>g: </label>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_g"><br>
+                                    <label>b: </label>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_b"><br>
+                                    <label>a: </label>
+                                    <input class="nums" type="number" min="0" max="1" step="0.00001" id="environment_fog_color_a"><br>
+                                </div><br>
+                                <label>Linear Start:</label>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_linearStart" value=""><br>
+                                <label>Linear Stop:</label>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_linearStop" value=""><br>
+                                <label>Exp Density:</label>
+                                <input class="nums" type="number" step="0.001"  id="environment_fog_expDensity" value=""><br>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--FIRST-->
+                    <div class="first hidden" id="pointer">
+                        <label>Pointer</label><br>
+                        <div id="pointer" class="second">
+                            <label>Visibility:</label>
+                            <select class="tex" id="pointer_visibility">
+                                <option value=""></option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select><br>
+                            <label>Crosshairs:</label>
+                            <select class="tex" id="pointer_crosshairs">
+                                <option value=""></option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select><br>
+                            <label>Length:</label>
+                            <input class="nums" type="number" step="0.001" id="pointer_length" value="0.0"><br>
+                            <label>Offset:</label>
+                            <div class="third">
+                                <label>x: </label>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_x"><br>
+                                <label>y: </label>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_y"><br>
+                                <label>z: </label>
+                                <input class="nums" type="number" step="0.001" id="camera_pointer_offset_z"><br>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--FIRST-->
+                    <div class="first hidden" id="boundaries">
+                        <label>Boundaries</label><br>
+                        <div class="second">
+                            <label>xLimit:</label>
+                            <div class="third">
+                                <label>min:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_xLimit_min"><br>
+                                <label>max:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_xLimit_max"><br>
+                            </div>
+                            <label>yLimit:</label>
+                            <div class="third">
+                                <label>min:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_yLimit_min"><br>
+                                <label>max:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_yLimit_max"><br>
+                            </div>
+                            <label>zLimit:</label>
+                            <div class="third">
+                                <label>min:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_zLimit_min"><br>
+                                <label>max:</label>
+                                <input class="nums" type="number" step="0.001" id="boundaries_zLimit_max"><br>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--FIRST-->
+                    <div class="first hidden" id="camera">
+                        <label>Camera</label><br>
+                        <div class="second">
+                            <label>Pose:</label>
+                            <div class="third">
+                                <label>Position:</label>
+                                <div class="fourth">
+                                    <label>x: </label>
+                                    <input class="nums" type="number" step="0.001" step="0.001" id="camera_pose_position_x"><br>
+                                    <label>y: </label>
+                                    <input class="nums" type="number" step="0.001" id="camera_pose_position_y"><br>
+                                    <label>z: </label>
+                                    <input class="nums" type="number" step="0.001" id="camera_pose_position_z"><br>
+                                </div>
+
+                                <label>Orientation:</label>
+                                <div class="fourth">
+                                    <label>Camera Orientation:</label>
+                                    <select class="tex" id="camera_orientation">
+                                        <option value="q">Quaternion</option>
+                                        <option value="ang">Angle Axis</option>
+                                        <option value="rot">Rotation Matrix</option>
+                                        <option value="ypr">Yaw Pitch Roll</option>
+                                    </select><br>
+                                    <div class="fifth">
+                                        <div id="camera_quaternion">
+                                            <label>x: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qx"><br>
+                                            <label>y: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qy"><br>
+                                            <label>z: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qz"><br>
+                                            <label>w: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qw"><br> 
+                                        </div>
+                                        <div id="camera_angleAxis">
+                                            <label>Angle: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_angle"><br>
+                                            <label>Axis: </label>
+                                            <div class="fifth">
+                                                <label>x: </label>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_x"><br>
+                                                <label>y: </label>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_y"><br>
+                                                <label>z: </label>
+                                                <input class="nums" step="0.001" type="number" id="camera_pose_orientation_axis_z"><br>
+                                            </div>
+                                        </div>
+                                        <div id="camera_ypr">
+                                            <label>Yaw: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yaw"><br>
+                                            <label>Pitch: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_pitch"><br>
+                                            <label>Roll: </label>
+                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_roll"><br>
+                                        </div>
+                                        <div id="camera_rotMatrix">
+                                           <div class="fifth">
+                                               <label>xx</label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xx"><br>
+                                               <label>xy </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xy"><br>
+                                               <label>xz </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_xz"><br>
+                                               <label>yx</label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yx"><br>
+                                               <label>yy </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yy"><br>
+                                               <label>yz </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_yz"><br>
+                                               <label>zx</label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zx"><br>
+                                               <label>zy </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zy"><br>
+                                               <label>zz </label>
+                                               <input class="nums" step="0.001" type="number" id="camera_pose_orientation_zz"><br>
+                                           </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <label>Clipping:</label>
+                            <div class="third">
+                                <label>Near:</label>
+                                <input class="nums" step="0.001" type="number" id="camera_clipping_near"><br>
+                                <label>Far:</label>
+                                <input class="nums" step="0.001" type="number" id="camera_clipping_far"><br>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <label>Fov:</label>
+                            <input class="nums" step="0.001" type="number" id="camera_fov">
+                        </div>
+
+                    </div>
+                    <!--FIRST-->
+                    <div class="first hidden" id="browserStartPage">
+                        <label>Browser Start Page</label><br>
+                        <div class="second">
+                            <label>url:</label>
+                            <input type="text" class="tex" id="browserStartPage_url">
+                        </div>
+                    </div>
+                    <!--FIRST-->
+                    <div class="first hidden" id="presentation">
+                        <label>Presentation</label><br>
+                        <div class="second">
+                            <label>File name:</label>
+                            <input type="text" class="tex" id="presentation_fileName"><br>
+                            <label>Enabled:</label>
+                            <select class="tex" id="presentation_enabled">
+                                <option value=""></option>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="first hidden" id="content">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <div id="dNd-buttons">
+            <a class="btn btn-default page-scroll" id="settings_submit">Generate and Download Room File</a>
+        </div>
+    </footer>

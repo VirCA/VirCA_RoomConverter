@@ -1,29 +1,31 @@
 var fs = require("fs");
-var parsing = require("../Parser-scfg/xml2json.js");
+var parsing = require("../Parser-scfg/parserFunctions.js");
 exports.scfgParser = function(filename, objectName, easyOgreExport) {
     var fn = "./uploads/" + filename;
 	var base = fs.readFileSync(fn).toString();
-    
-    if (easyOgreExport == "on") {
-        var settings = require("./easyOgreSettingsObject.js");
+    if (easyOgreExport == "on" || easyOgreExport == "justDefault") {
+    	console.log("Settings part: default");
+        var settings = require("./easyOgreSettingsObject.js")();
         var newBase = parsing.cutContentFromBegining(base, "<environment", "</environment>");
         if (newBase.indexOf("colourAmbient") >= 0) {
             var b1 = parsing.cutContentFromBegining(newBase, "<colourAmbient", "/>");
+            
+            b1 = b1.substring(14);
             settings.environment.ambientColor.r = parsing.tagBase(b1, "r");
             settings.environment.ambientColor.g = parsing.tagBase(b1, "g");
             settings.environment.ambientColor.b = parsing.tagBase(b1, "b");
         }
         if (newBase.indexOf("colourBackground") >= 0) {
             var b2 = parsing.cutContentFromBegining(newBase, "<colourBackground", "/>");
+            b2 = b2.substring(16);
             settings.environment.backgroundColor.r = parsing.tagBase(b2, "r");
             settings.environment.backgroundColor.g = parsing.tagBase(b2, "g");
             settings.environment.backgroundColor.b = parsing.tagBase(b2, "b");
         }
-        
     }
     else {
+    	console.log("Settings part: scfg");
         base = parsing.cutContentFromBegining(base, "<virca", "</virca>");
-        //console.log(base);
         var settings = {};
         settings.type = 'scfg';
         settings.details = baseDetails(base);
@@ -121,15 +123,21 @@ exports.scfgParser = function(filename, objectName, easyOgreExport) {
 		var sky_b = parsing.cutContentFromBegining(base, "<skybox", "/>");
 		light.skybox.materialName = parsing.tagBase(sky_b, "materialName");
 		light.skybox.distance = parsing.tagBase(sky_b, "distance");
+	
+	//console.log("1: "+light.skybox.distance); // itt még jó
 
 		var ambi_b = parsing.cutContentFromBegining(base, "<ambientcolor", "/>");
         // console.log(ambi_b + "\n\n"+base);
         //ambi_b = parsing.cutFrame(ambi_b, "<ambientcolor", "/>");
 
 		//console.log("teszt: "+ ambi_b);
+		ambi_b = parsing.cutContentFromBegining(ambi_b, " ", "/>");
 		light.ambientcolor.r = parsing.tagBase(ambi_b, "r");
+		//console.log(light.ambientcolor.r);
 		light.ambientcolor.g = parsing.tagBase(ambi_b, "g");
+		//console.log(light.ambientcolor.g);
 		light.ambientcolor.b = parsing.tagBase(ambi_b, "b");
+		//console.log(light.ambientcolor.b);
 	 	
 		var crossh_b = parsing.cutContentFromBegining(base, "<crosshairs", "/>");
 		light.crosshairs.enable = parsing.tagBase(crossh_b, "enable");

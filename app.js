@@ -3,19 +3,18 @@ var path = require('path');
 
 var server = new Hapi.Server();
 var fs = require('fs');
-var result = [];
+var roomGenerator = require('./Parser/roomGenerator.js');
 var parser = require('./Parser/Parser-MergeSceneScfg/parser.js');
 var roomFN = "";
 var pathROOM = "";
 var version = "";
-var fileNScene = "", fileNScfg = "";
-var roomDOWNable = undefined;
 var inert = require('inert');
 
 var host = process.env.VCAP_APP_HOST || 'localhost';
 var port = process.env.VCAP_APP_PORT || 8080;
 
 var roomPath = "";
+var room = {};
 server.connection({
     port: port,
     host: host
@@ -34,9 +33,136 @@ server.route([{
     },
     {
         method: 'GET',
+        path: '/vircalogo.png',
+        handler: {
+            file: 'vircalogo.png'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/jquery.js',
+        handler: {
+            file: 'js/jquery.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/bootstrap.min.js',
+        handler: {
+            file: 'js/bootstrap.min.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/jquery.easing.min.js',
+        handler: {
+            file: 'js/jquery.easing.min.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/scrolling-nav.js',
+        handler: {
+            file: 'js/scrolling-nav.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/converter_dnd_upload.js',
+        handler: {
+            file: 'js/converter_dnd_upload.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/js/settings.js',
+        handler: {
+            file: 'js/settings.js'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/settings.html',
+        handler: {
+            file: 'settings.html'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/bootstrap.min.css',
+        handler: {
+            file: 'css/bootstrap.min.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/scrolling-nav.css',
+        handler: {
+            file: 'css/scrolling-nav.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/themes/default/32px.png',
+        handler: {
+            file: 'css/jstree/dist/themes/default/32px.png'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/themes/default/throbber.gif',
+        handler: {
+            file: 'css/jstree/dist/themes/default/throbber.gif'
+        }
+    },
+    {
+        method: 'GET',
         path: '/styles.css',
         handler: {
             file: 'css/styles.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/settingsStyle.css',
+        handler: {
+            file: 'css/settingsStyle.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/themes/default/style.css',
+        handler: {
+            file: 'css/jstree/dist/themes/default/style.css'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/css/jstree/dist/jstree.min.js',
+        handler: {
+            file: 'css/jstree/dist/jstree.min.js'
+        }
+    },
+    {
+        method: 'POST',
+        path: '/builder',
+        handler: function (request, reply){
+            reply(room);
+        }
+    },
+    {
+        method: 'POST',
+        path: '/roomgenerator',
+        config: {
+            handler: function (request, reply) {
+                var myRoomObj = JSON.parse(request.payload.room);
+                var myGeneratedRoom = roomGenerator(myRoomObj);
+                fs.writeFile('te.txt', myGeneratedRoom);
+                reply(myGeneratedRoom);
+            },
+            payload: {
+                maxBytes: 10485760
+            }
         }
     },
     {
@@ -44,6 +170,7 @@ server.route([{
         path: '/upload',
         config: {
             handler: function (request, reply) {
+                room = {};
                 var file = request.payload.file;
                  version = 1.0;
                 easyOgreExport = request.payload.easyOgreExport;
@@ -67,10 +194,10 @@ server.route([{
                     console.log("SUCCESS: One scene file has been uploaded, without scfg.");
                     var SCENE_file_name = Date.now() + file.hapi.filename;
                     fs.writeFileSync("./uploads/" + SCENE_file_name, file._data);
-                    
-                    roomPath = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
-                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
-                    console.log("\n");
+                    room = parser(SCENE_file_name, SCENE_file_name, roomFN, version, easyOgreExport);
+                    room.roomName = roomFN;
+                    reply(fs.readFileSync('./settings.html'));
+                    //console.log("\n");
                 }
                 else if (file.length == 2) {
                     var SCENE_file_name = "";
@@ -96,11 +223,11 @@ server.route([{
                         return;
                     }
                     console.log("SUCCESS: Scene and scfg file has been uploaded.");
-                    console.log('ASDASDASD');
-                    roomPath = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
-                   
-                    reply.file(roomPath).header("Content-Disposition", "attachment; filename=" + roomFN + ".room");
-                    console.log("\n");
+                    
+                    room = parser(SCENE_file_name, SCFG_file_name, roomFN, version, easyOgreExport);
+                    room.roomName = roomFN;
+                    reply(fs.readFileSync('./settings.html'));
+                    //console.log("\n");
                 }
                 else {
                     reply("ERROR: You selected more than two file, or the extensions were wrong.");
@@ -110,7 +237,8 @@ server.route([{
             payload: {
                 output: 'stream',
                 parse: true,
-                allow: 'multipart/form-data'
+                allow: 'multipart/form-data',
+                maxBytes: 10485760
             }
         }
     }

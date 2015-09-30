@@ -12,13 +12,13 @@ The simplest way to run the application (server) is follow the instructions belo
 + The standard port to the server is 8080.
 + If the server is up, you'll see a console message like "Server has started...". After that, you need to open a browser, and if you navigate to `localhost/PORTNUMBER` you will see the the converter.
 + Here, you need to select or drag and drop your .scene and .scfg files. It can be another way to upload just a scene file, it will be correct too.
-+ The last step to click on the `Submit` button, that will start all proceeds.
++ The last step to click on the submit button, that will start all proceeds.
 + When the convertation has finished, you need to click to the `Download` button to start download your room file.
 + Your room file's name will be the same as your scene file was.
 + If you would like to start another convertation you can press `Remove selected file(s)` button.
 
 ##How sources operates
-+ The server uses hapi.js.
++ The server has been implemented in app.js file and use hapi.js module, which is more effective than the brute-force http one.
 + The parsers and converters are in the Parser folder, each process has its own folder.
 
 + SCENE: one module creates a json file from the original xml, and another one generate the .room xml scheme from the json

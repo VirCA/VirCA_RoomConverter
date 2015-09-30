@@ -3,14 +3,21 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
     var fromJSON = jsonfile.readFileSync("./" +objectName);
 	var js2xml = require('js2xmlparser');
 	var fs = require('fs');
-
-    var settings = require("./settingsObject.js");    
+    var settings = require("./settingsObject.js")(); 
+    //console.log(settings);
     if (easyOgreExport == undefined) {
+        //------------------------------------------LIGHT-----------------------------------------------
         if (fromJSON.light.skybox.materialName != undefined)
             settings.environment.skybox.materialName = fromJSON.light.skybox.materialName;
+        
         if (fromJSON.light.skybox.distance != undefined)
             settings.environment.skybox.distance = fromJSON.light.skybox.distance;
-        
+        if(fromJSON.light.skybox.materialName != undefined && (fromJSON.light.skybox.distance == undefined || fromJSON.light.skybox.distance == "")){
+            settings.environment.skybox.distance = 1000;
+        }
+
+   // console.log("2from: "+fromJSON.light.skybox.distance+"  3nemfrom: "+settings.environment.skybox.distance); // 
+        //--------------------------------------light.ambientcolor---------------------------------------------------
         settings.environment.ambientColor.r = fromJSON.light.ambientcolor.r;
         settings.environment.ambientColor.g = fromJSON.light.ambientcolor.g;
         settings.environment.ambientColor.b = fromJSON.light.ambientcolor.b;
@@ -21,15 +28,21 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
             settings.environment.ambientColor.a = 1;
         }
         
-        if (fromJSON.light.runtimeshadersystem.enable != undefined)
-            settings.environment.runtimeshadersystem = fromJSON.light.runtimeshadersystem.enable;
+        
+        //------------------------------------------light.shadow-----------------------------------------------
         if (fromJSON.light.shadow.type != undefined)
-            settings.environment.shadow = fromJSON.light.shadow.type;
+            settings.environment.shader = fromJSON.light.shadow.type;
+        //--------------------------------------------light.rtss---------------------------------------------
+        if (fromJSON.light.runtimeshadersystem.enable == "true" && fromJSON.light.shadow.type == "NONE")
+            settings.environment.shader = "RTSS";
+        //----------------------------------------------light.comositors-------------------------------------------
+        
         if (fromJSON.light.compositors.Bloom.enable != undefined)
             settings.environment.compositors.Bloom = fromJSON.light.compositors.Bloom.enable;
         if (fromJSON.light.compositors.MotionBlur.enable != undefined)
             settings.environment.compositors.MotionBlur = fromJSON.light.compositors.MotionBlur.enable;
         
+        //-------------------------------------------light.fog----------------------------------------------
         
         if (fromJSON.light.fog.type != undefined) {
             settings.environment.fog.type = fromJSON.light.fog.type.toUpperCase();
@@ -41,17 +54,18 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
             settings.environment.fog.linearStop = fromJSON.light.fog.linearStop;
             settings.environment.fog.expDensity = fromJSON.light.fog.expDensity;
         }
+        //---------------------------------------------------------------------------------------------------------
+        //------------------------------------POINTER---------------------------------------------
         if (fromJSON.pointer.hidden == "true") {
-            settings.pointer.visibility = "true";
+            settings.pointer.visibility = "false";
         }
         else if (fromJSON.pointer.hidden == "false") {
-            settings.pointer.visibility = "false";
+            settings.pointer.visibility = "true";
         }
         settings.pointer.crosshairs = fromJSON.light.crosshairs.enable;
         settings.pointer.length = fromJSON.pointer.length;
-        settings.pointer.offset.x = fromJSON.pointer.origin.x;
-        settings.pointer.offset.y = fromJSON.pointer.origin.y;
-        settings.pointer.offset.z = fromJSON.pointer.origin.z;
+        //---------------------------------------------------------------------------------------------------------
+        //-------------------------------------------BOUNDARIES----------------------------------------------
         
         settings.boundaries.xlimit.min = fromJSON.physlimits.xlimit.min;
         settings.boundaries.xlimit.max = fromJSON.physlimits.xlimit.max;
@@ -59,10 +73,16 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         settings.boundaries.ylimit.max = fromJSON.physlimits.ylimit.max;
         settings.boundaries.zlimit.min = fromJSON.physlimits.zlimit.min;
         settings.boundaries.zlimit.max = fromJSON.physlimits.zlimit.max;
-        
+        //---------------------------------------------------------------------------------------------------------
+        //-------------------------------------------CAMERA--------------------------------------------------------------
         settings.camera.pose.position.x = fromJSON.camera.position.x;
         settings.camera.pose.position.y = fromJSON.camera.position.y;
         settings.camera.pose.position.z = fromJSON.camera.position.z;
+        //default better?
+        settings.pointer.offset.x = fromJSON.pointer.origin.x - settings.camera.pose.position.x;
+        settings.pointer.offset.y = fromJSON.pointer.origin.y - settings.camera.pose.position.y;
+        settings.pointer.offset.z = fromJSON.pointer.origin.z - settings.camera.pose.position.z;
+
         settings.camera.pose.orientation.quaternion.x = fromJSON.camera.rotation.x;
         settings.camera.pose.orientation.quaternion.y = fromJSON.camera.rotation.y;
         settings.camera.pose.orientation.quaternion.z = fromJSON.camera.rotation.z;
@@ -72,13 +92,20 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         settings.camera.clipping.far = fromJSON.camera.clipping.far;
         
         settings.camera.fov = fromJSON.camera.fov;
-        
+        //---------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------------BROWSER-----------------------------------------------------------
         settings.browserStartPage.url = fromJSON.browser.homepage.url;
+        //---------------------------------------------------------------------------------------------------------
+
+        //------------------------------------------------PRESENTATION---------------------------------------------------------
         
         settings.presentation.fileName = fromJSON.presentation.xml;
         settings.presentation.enabled = fromJSON.presentation.use;
+        //---------------------------------------------------------------------------------------------------------
+       
     }
-    else if(easyOgreExport == "on"){
+    else if(easyOgreExport == "on" || easyOgreExport == "justDefault"){
         settings = fromJSON;
     }
     var jsfl = require('jsonfile');
@@ -104,5 +131,8 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
 
 	str=str.replace(/^\s*[\r\n]/gm, "");
 
-	fs.writeFileSync("./"+roomName, str);
+    fs.writeFileSync("./" + roomName, str);
+
+
+    return settings;
 }
