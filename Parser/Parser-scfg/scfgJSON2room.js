@@ -12,10 +12,12 @@ exports.scfgJSON2room = function(filename, objectName, roomName, easyOgreExport)
         
         if (fromJSON.light.skybox.distance != undefined)
             settings.environment.skybox.distance = fromJSON.light.skybox.distance;
-        if(fromJSON.light.skybox.materialName != undefined && (fromJSON.light.skybox.distance == undefined || fromJSON.light.skybox.distance == "")){
+        console.log(fromJSON.light.skybox.materialName+ "     "+fromJSON.light.skybox.distance);
+        if((fromJSON.light.skybox.materialName != undefined && fromJSON.light.skybox.materialName != "" ) && (fromJSON.light.skybox.distance == undefined || fromJSON.light.skybox.distance == "")){
             settings.environment.skybox.distance = 1000;
         }
 
+        console.log("\""+fromJSON.light.skybox.materialName+ "\"     \""+fromJSON.light.skybox.distance+"\"");
    // console.log("2from: "+fromJSON.light.skybox.distance+"  3nemfrom: "+settings.environment.skybox.distance); // 
         //--------------------------------------light.ambientcolor---------------------------------------------------
         settings.environment.ambientColor.r = fromJSON.light.ambientcolor.r;

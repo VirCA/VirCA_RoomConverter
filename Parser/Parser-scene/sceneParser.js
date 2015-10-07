@@ -167,7 +167,7 @@ else if (nodeBaseDetails(base).name != undefined && nodeBaseDetails(base).name.t
         node.browser.url = "https://www.google.hu/?gfe_rd=cr&ei=KsbJVfWcKYau8wfLjoSwAg&gws_rd=ssl#q=" + getContentBetweenUnderline(tmp,"_brw");
         node.browser.zoom = 0;
     }
-	if(tmp.indexOf("_resH_") >= 0 && tmp.indexOf("_resV") >= 0){
+	if(tmp.indexOf("_resH") >= 0 && tmp.indexOf("_resV") >= 0){
         node.browser.resolution_w = getContentBetweenUnderline(tmp, "resH");
         node.browser.resolution_h = getContentBetweenUnderline(tmp,"_resV");
 	}
