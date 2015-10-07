@@ -7,6 +7,7 @@ exports.sceneParser = function (filename, easyOgreExport, objectName){
 
 	var nodes = [];
 	var i = 0;
+	//console.log(cutFrame(scene, "<nodes", "</nodes>"));
 	while(scene.indexOf("<node") != -1){
         
             nodes.push(
@@ -23,6 +24,7 @@ exports.sceneParser = function (filename, easyOgreExport, objectName){
 }
 
 function nodeMultiplier(node){
+	
     if (node.mainType == "node") {
         node.scale = scaleMulti(node.scale);
         node.position = scaleMulti(node.position);
@@ -67,7 +69,7 @@ function wh_multi(tmp){
 }
 function parseOneNode(base){
 	base = cutContentFromBegining(base, "<node", "</node>");
-	
+	//console.log(base);
 	if(base.indexOf("<light") >= 0){
 		
 		base = cutContentFromBegining(base, "<node", "</node>");
@@ -168,7 +170,7 @@ else if (nodeBaseDetails(base).name != undefined && nodeBaseDetails(base).name.t
         node.browser.zoom = 0;
     }
 	if(tmp.indexOf("_resH") >= 0 && tmp.indexOf("_resV") >= 0){
-        node.browser.resolution_w = getContentBetweenUnderline(tmp, "resH");
+        node.browser.resolution_w = getContentBetweenUnderline(tmp, "_resH");
         node.browser.resolution_h = getContentBetweenUnderline(tmp,"_resV");
 	}
     
@@ -652,7 +654,7 @@ function readFromFile(fileName){
     var fn = "./uploads/" + fileName;
     var scene = fs.readFileSync(fn).toString();
     scene = cutContentFromBegining(scene, "<scene", "</scene>");
-	scene = cutFrame(scene, "<nodes>", "</nodes>");
+	scene = cutFrame(scene, "<nodes", "</nodes>");
 	return scene.trim();
 }
 
