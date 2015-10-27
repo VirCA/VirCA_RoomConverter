@@ -8,6 +8,7 @@ The simplest way to run the application (server) is follow the instructions belo
 
 + Open a CMD under windows or a terminal under unix.
 + Use cd command to navigate to the aplication's room directory: `cd C:\ConverterRootFolder`
++ Install the necessary moduls: `npm install`
 + Use NodeJS program and run app.js in the root directory: `node app.js`
 + The standard port to the server is 8080.
 + If the server is up, you'll see a console message like "Server has started...". After that, you need to open a browser, and if you navigate to `localhost/PORTNUMBER` you will see the the converter.
