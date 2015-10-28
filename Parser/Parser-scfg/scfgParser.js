@@ -3,6 +3,7 @@ var parsing = require("../Parser-scfg/parserFunctions.js");
 exports.scfgParser = function(filename, objectName, easyOgreExport) {
     var fn = "./uploads/" + filename;
 	var base = fs.readFileSync(fn).toString();
+	base = base.replace(/,/gim, ".");
     if (easyOgreExport == "on" || easyOgreExport == "justDefault") {
     	console.log("Settings part: default");
         var settings = require("./easyOgreSettingsObject.js")();

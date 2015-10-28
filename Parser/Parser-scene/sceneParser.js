@@ -3,7 +3,8 @@ var jsfl = require('jsonfile');
 
 exports.sceneParser = function (filename, easyOgreExport, objectName){
     var scene = readFromFile(filename);
-    //console.log(scene);
+    scene = scene.replace(/,/gim, ".");
+
 
 	var nodes = [];
 	var i = 0;
