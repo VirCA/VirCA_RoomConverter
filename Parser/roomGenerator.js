@@ -43,7 +43,7 @@ module.exports = function (room) {
     var version = '1.0';
 
     var generatedRoom = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<room name=\"" + room.roomName + "\" version=\"" + version + "\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" + settings + "\n" + content + "\n</room>";
-    generatedRoom = generatedRoom.replace(/,/gim, ".");
+    generatedRoom = generatedRoom.replace(/[0-9]*,[0-9]*/gim, ".");
     var fs = require('fs');
     fs.writeFileSync('./uploads/rooms/'+Date.now()+room.roomName+'.room', generatedRoom);
 

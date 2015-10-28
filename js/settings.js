@@ -70,80 +70,8 @@ function Settings2Run() {
                 $(tmp).removeClass("hidden").addClass("shown");
             }
         }
-        $('#camera_orientation').change(function () {
-
-            if ($('#camera_orientation').val() == 'q') {
-                $('#camera_quaternion').removeClass('hidden').addClass('shown');
-                $('#camera_angleAxis').removeClass('shown').addClass('hidden');
-                $('#camera_ypr').removeClass('shown').addClass('hidden');
-                $('#camera_rotMatrix').removeClass('shown').addClass('hidden');
-            }
-            else if ($('#camera_orientation').val() == 'rot') {
-                $('#camera_quaternion').removeClass('shown').addClass('hidden');
-                $('#camera_angleAxis').removeClass('shown').addClass('hidden');
-                $('#camera_ypr').removeClass('shown').addClass('hidden');
-                $('#camera_rotMatrix').removeClass('hidden').addClass('shown');
-            }
-            else if ($('#camera_orientation').val() == 'ypr') {
-                $('#camera_quaternion').removeClass('shown').addClass('hidden');
-                $('#camera_angleAxis').removeClass('shown').addClass('hidden');
-                $('#camera_ypr').removeClass('hidden').addClass('shown');
-                $('#camera_rotMatrix').removeClass('shown').addClass('hidden');
-            }
-            else if ($('#camera_orientation').val() == 'ang') {
-                $('#camera_quaternion').removeClass('shown').addClass('hidden');
-                $('#camera_angleAxis').removeClass('hidden').addClass('shown');
-                $('#camera_ypr').removeClass('shown').addClass('hidden');
-                $('#camera_rotMatrix').removeClass('shown').addClass('hidden');
-            }
-
-        });
-
-        $('select').change(function () {
-            for (var i = 0; i < room.nodeTypes.length; i++) {
-                if ($('#content_node' + i + '_pose_orientation').val() == 'q') {
-                    $('#node' + i + '_quaternion').removeClass('hidden').addClass('shown');
-                    $('#node' + i + '_angleAxis').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_ypr').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_rotMatrix').removeClass('shown').addClass('hidden');
-                }
-                else if ($('#content_node' + i + '_pose_orientation').val() == 'rot') {
-                    $('#node' + i + '_quaternion').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_angleAxis').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_ypr').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_rotMatrix').removeClass('hidden').addClass('shown');
-                }
-                else if ($('#content_node' + i + '_pose_orientation').val() == 'ypr') {
-                    $('#node' + i + '_quaternion').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_angleAxis').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_ypr').removeClass('hidden').addClass('shown');
-                    $('#node' + i + '_rotMatrix').removeClass('shown').addClass('hidden');
-                }
-                else if ($('#content_node' + i + '_pose_orientation').val() == 'ang') {
-                    $('#node' + i + '_quaternion').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_angleAxis').removeClass('hidden').addClass('shown');
-                    $('#node' + i + '_ypr').removeClass('shown').addClass('hidden');
-                    $('#node' + i + '_rotMatrix').removeClass('shown').addClass('hidden');
-                }
-                if ($('#room_content_node' + i + '_light_type').val() == 's') {
-                    $('#room_content_node' + i + '_light_type_spot').removeClass('hidden').addClass('shown');
-                    $('#room_content_node' + i + '_light_type_point').removeClass('shown').addClass('hidden');
-                    $('#room_content_node' + i + '_light_type_directional').removeClass('shown').addClass('hidden');
-                }
-                else if ($('#room_content_node' + i + '_light_type').val() == 'p') {
-                    $('#room_content_node' + i + '_light_type_spot').removeClass('shown').addClass('hidden');
-                    $('#room_content_node' + i + '_light_type_point').removeClass('hidden').addClass('shown');
-                    $('#room_content_node' + i + '_light_type_directional').removeClass('shown').addClass('hidden');
-                }
-                else if ($('#room_content_node' + i + '_light_type').val() == 'd') {
-                    $('#room_content_node' + i + '_light_type_spot').removeClass('shown').addClass('hidden');
-                    $('#room_content_node' + i + '_light_type_point').removeClass('shown').addClass('hidden');
-                    $('#room_content_node' + i + '_light_type_directional').removeClass('hidden').addClass('shown');
-                }
-
-            }
-        });
-
+       
+        
     });
     genRoomButton.onclick = function () {
         GetSettingsObject();
@@ -247,15 +175,6 @@ function HideAll() {
     $('#content').removeClass("shown").addClass("hidden");
     for (var i = 0; i < room.nodeTypes.length; i++) {
         $('#content_node' + i).removeClass("shown").addClass("hidden");
-
-        $('#node' + i + '_quaternion').removeClass('shown').addClass('hidden');
-        $('#node' + i + '_angleAxis').removeClass('shown').addClass('hidden');
-        $('#node' + i + '_ypr').removeClass('shown').addClass('hidden');
-        $('#node' + i + '_rotMatrix').removeClass('shown').addClass('hidden');
-
-        $('#room_content_node' + i + '_light_type_spot').removeClass('shown').addClass('hidden');
-        $('#room_content_node' + i + '_light_type_point').removeClass('shown').addClass('hidden');
-        $('#room_content_node' + i + '_light_type_directional').removeClass('shown').addClass('hidden');
     }
 }
 
@@ -334,47 +253,10 @@ function GetContentObject() {
         room.content.node[i].pose.position.x = $('#content_node' + i + '_pose_position_x').val();
         room.content.node[i].pose.position.y = $('#content_node' + i + '_pose_position_y').val();
         room.content.node[i].pose.position.z = $('#content_node' + i + '_pose_position_z').val();
-        //---------pose_orientation--------
-        if ($('#node' + i + '_pose_orientation').val() == "q") {
-            room.content.node[i].pose.orientation.quaternion.x = $('#node' + i + '_pose_orientation_qx').val();
-            room.content.node[i].pose.orientation.quaternion.y = $('#node' + i + '_pose_orientation_qy').val();
-            room.content.node[i].pose.orientation.quaternion.z = $('#node' + i + '_pose_orientation_qz').val();
-            room.content.node[i].pose.orientation.quaternion.w = $('#node' + i + '_pose_orientation_qw').val();
-        }
-        else if ($('#node' + i + '_pose_orientation').val() == "ang") {
-            room.content.node[i].pose.orientation.angleAxis.angle = $('#node' + i + '_pose_orientation_angle').val();
-            room.content.node[i].pose.orientation.angleAxis.axis.x = $('#node' + i + '_pose_orientation_axis_x').val();
-            room.content.node[i].pose.orientation.angleAxis.axis.y = $('#node' + i + '_pose_orientation_axis_y').val();
-            room.content.node[i].pose.orientation.angleAxis.axis.z = $('#node' + i + '_pose_orientation_axis_z').val();
-            room.content.node[i].pose.orientation.quaternion.x = undefined;
-            room.content.node[i].pose.orientation.quaternion.y = undefined;
-            room.content.node[i].pose.orientation.quaternion.z = undefined;
-            room.content.node[i].pose.orientation.quaternion.w = undefined;
-        }
-        else if ($('#node' + i + '_pose_orientation').val() == "ypr") {
-            room.content.node[i].pose.orientation.ypr.yaw = $('#node' + i + '_pose_orientation_yaw').val();
-            room.content.node[i].pose.orientation.ypr.pitch = $('#node' + i + '_pose_orientation_pitch').val();
-            room.content.node[i].pose.orientation.ypr.roll = $('#node' + i + '_pose_orientation_roll').val();
-            room.content.node[i].pose.orientation.quaternion.x = undefined;
-            room.content.node[i].pose.orientation.quaternion.y = undefined;
-            room.content.node[i].pose.orientation.quaternion.z = undefined;
-            room.content.node[i].pose.orientation.quaternion.w = undefined;
-        }
-        else if ($('#node' + i + '_pose_orientation').val() == "rot") {
-            room.content.node[i].pose.orientation.rotMatrix.xx = $('#node' + i + '_pose_orientation_xx').val();
-            room.content.node[i].pose.orientation.rotMatrix.xy = $('#node' + i + '_pose_orientation_xy').val();
-            room.content.node[i].pose.orientation.rotMatrix.xz = $('#node' + i + '_pose_orientation_xz').val();
-            room.content.node[i].pose.orientation.rotMatrix.yx = $('#node' + i + '_pose_orientation_yx').val();
-            room.content.node[i].pose.orientation.rotMatrix.yy = $('#node' + i + '_pose_orientation_yy').val();
-            room.content.node[i].pose.orientation.rotMatrix.yz = $('#node' + i + '_pose_orientation_yz').val();
-            room.content.node[i].pose.orientation.rotMatrix.zx = $('#node' + i + '_pose_orientation_zx').val();
-            room.content.node[i].pose.orientation.rotMatrix.zy = $('#node' + i + '_pose_orientation_zy').val();
-            room.content.node[i].pose.orientation.rotMatrix.zz = $('#node' + i + '_pose_orientation_zz').val();
-            room.content.node[i].pose.orientation.quaternion.x = undefined;
-            room.content.node[i].pose.orientation.quaternion.y = undefined;
-            room.content.node[i].pose.orientation.quaternion.z = undefined;
-            room.content.node[i].pose.orientation.quaternion.w = undefined;
-        }
+        room.content.node[i].pose.orientation.quaternion.x = $('#node' + i + '_pose_orientation_qx').val();
+        room.content.node[i].pose.orientation.quaternion.y = $('#node' + i + '_pose_orientation_qy').val();
+        room.content.node[i].pose.orientation.quaternion.z = $('#node' + i + '_pose_orientation_qz').val();
+        room.content.node[i].pose.orientation.quaternion.w = $('#node' + i + '_pose_orientation_qw').val();
         room.content.node[i].scale.x = $('#room_content_node' + i + '_scale_x').val();
         room.content.node[i].scale.y = $('#room_content_node' + i + '_scale_y').val();
         room.content.node[i].scale.z = $('#room_content_node' + i + '_scale_z').val();
@@ -543,20 +425,18 @@ function GetTree() {
 }
 function ContentCreation() {
     var p = 0;
-    var shown, shownValue, other1, other1Value, other2, other2Value, sHidden = "hidden", dHidden = "hidden", pHidden = "hidden";
     for (var i = 0; i < room.nodeTypes.length; ++i) {
-        $('#content').append('<div class="hidden" id="content_node' + i + '">');//content_node1
+        $('#content').append('<div class="hidden" id="content_node' + i + '"></div>');//content_node1
         $('#content_node' + i).append('<div class="first" id="content_node' + i + '_name"><label>Node name:</label><input type="text" class"tex" id="content_node' + i + '_nameValue" value="' + room.content.node[i]['@'].name + '"></div>');//content_node1_nameValue
         $('#content_node' + i).append('<div class="second" id="content_node' + i + '_pose"><label>Pose:</label></div>');//content_node1_pose
-        $('#content_node' + i + '_pose').append('<div class="third" id="content_node' + i + '_pose_position"><label>Position:</label><br><div class="fourth" id="content_node' + i + '_pose_positionValues"></div>');//content_node1_pose_position && content_node1_pose_positionValues
+        $('#content_node' + i + '_pose').append('<div class="third" id="content_node' + i + '_pose_position"><label>Position:</label><br><div class="fourth" id="content_node' + i + '_pose_positionValues"></div></div>');//content_node1_pose_position && content_node1_pose_positionValues
         $('#content_node' + i + '_pose_positionValues').append('<label>x:</label><input class="nums" type="number" id="content_node' + i + '_pose_position_x" value="' + room.content.node[i].pose.position.x + '"><br>');//content_node1_pose_position_x
         $('#content_node' + i + '_pose_positionValues').append('<label>y:</label><input class="nums" type="number" id="content_node' + i + '_pose_position_y" value="' + room.content.node[i].pose.position.y + '"><br>');//content_node1_pose_position_y
         $('#content_node' + i + '_pose_positionValues').append('<label>z:</label><input class="nums" type="number" id="content_node' + i + '_pose_position_z" value="' + room.content.node[i].pose.position.z + '"><br>'); //content_node1_pose_position_z
-        $('#content_node' + i + '_pose').append('<div class="third"><label>Orientation:</label>');//content_node1_pose_orientetion
-        $('#content_node' + i + '_pose').append('<select class="tex" id="content_node' + i + '_pose_orientation"><option value="q">Quaternion</option><option value="ang">Angle Axis</option><option value="rot">Rotation Matrix</option><option value="ypr">Yaw Pitch Roll</option></select><br><br>');
-        $('#content_node' + i + '_pose').append(
-            '<div class="fifth">' +
-            '   <div class="fifth"id="node' + i + '_quaternion">' +
+        $('#content_node' + i + '_pose').append('<div id="content_node'+i+'_pose_orientations" class="third"><label>Orientation:</label></div>');//content_node1_pose_orientetion
+        $('#content_node' + i + '_pose_orientations').append(
+            '<div class="fourth">' +
+            '   <div id="node' + i + '_quaternion">' +
             '       <label>x: </label>' +
             '       <input class="nums" type="number" id="node' + i + '_pose_orientation_qx" value="' + room.content.node[i].pose.orientation.quaternion.x + '"><br>' +
             '       <label>y: </label>' +
@@ -565,50 +445,7 @@ function ContentCreation() {
             '       <input class="nums" type="number" id="node' + i + '_pose_orientation_qz" value="' + room.content.node[i].pose.orientation.quaternion.z + '"><br>' +
             '       <label>w: </label>' +
             '       <input class="nums" type="number" id="node' + i + '_pose_orientation_qw" value="' + room.content.node[i].pose.orientation.quaternion.w + '"><br> ' +
-            '   </div>' +
-            '   <div id="node' + i + '_angleAxis" class="hidden">' +
-            '    <label>Angle: </label>' +
-            '    <input class="nums" type="number" id="node' + i + '_pose_orientation_angle"><br>' +
-            '    <label>Axis: </label>' +
-            '       <div class="fifth">' +
-            '           <label>x: </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_axis_x"><br>' +
-            '           <label>y: </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_axis_y"><br>' +
-            '           <label>z: </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_axis_z"><br>' +
-            '       </div>' +
-            '   </div>' +
-            '   <div id="node' + i + '_ypr" class="hidden">' +
-            '       <label>Yaw: </label>' +
-            '       <input class="nums" type="number" id="node' + i + '_pose_orientation_yaw"><br>' +
-            '       <label>Pitch: </label>' +
-            '       <input class="nums" type="number" id="node' + i + '_pose_orientation_pitch"><br>' +
-            '       <label>Roll: </label>' +
-            '       <input class="nums" type="number" id="node' + i + '_pose_orientation_roll"><br>' +
-            '   </div>' +
-            '   <div id="node' + i + '_rotMatrix" class="hidden">' +
-            '       <div class="fifth">' +
-            '           <label>xx</label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_xx"><br>' +
-            '           <label>xy </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_xy"><br>' +
-            '           <label>xz </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_xz"><br>' +
-            '           <label>yx</label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_yx"><br>' +
-            '           <label>yy </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_yy"><br>' +
-            '           <label>yz </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_yz"><br>' +
-            '           <label>zx</label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_zx"><br>' +
-            '           <label>zy </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_zy"><br>' +
-            '           <label>zz </label>' +
-            '           <input class="nums" type="number" id="node' + i + '_pose_orientation_zz"><br>' +
-            '       </div>' +
-            '   </div>' +
+            '   </div>'+
             '</div>'
         );
         $('#content_node' + i).append(
@@ -690,69 +527,15 @@ function ContentCreation() {
                 '</div>'
                 );
             $('#content_node' + i + '_light_castShadows').val(room.content.node[i].light.castShadows);
+
+
             if (room.lightType[p] == 'spot') {
-                shown = 'Spot';
-                shownValue = 's';
-                other1 = 'Directional';
-                other1Value = 'd';
-                other2 = 'Point';
-                other2Value = 'p';
-                shidden ="";
-            }
-            else if (room.lightType[p] == 'point') {
-                shown = 'Point';
-                shownValue = 'p';
-                other1 = 'Directional';
-                other1Value = 'd';
-                other2 = 'Spot';
-                other2Value = 's';
-                phidden = "";
-            }
-            else if (room.lightType[p] == 'directional') {
-                shown = 'Directional';
-                shownValue = 'd';
-                other1 = 'Spot';
-                other1Value = 's';
-                other2 = 'Point';
-                other2Value = 'p';
-                dhidden = "";
-            }
-            ++p;
-            $('#content_node' + i).append('<label>Type:</label>');
-            $('#content_node' + i).append('<select class="tex" id="room_content_node' + i + '_light_type"><option value="' + shownValue + '">' + shown + '</option><option value="' + other1Value + '">' + other1 + '</option><option value="' + other2Value + '">' + other2 + '</option></select><br><br>');
-            $('#content_node' + i).append(
-                '<div class="fifth">' +
-                '   <div class="fifth '+pHidden+'" id="room_content_node' + i + '_light_type_point">' +
-                '       <label>Attenuation: </label>' +
-                '       <div class="fifth">' +
-                '           <label>Range:</label>' +
-                '           <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_range" value="' + room.content.node[i].light.type.point.attenuation.range + '"><br>' +
-                '           <label>Manual: </label>' +
-                '           <div class="fifth">' +
-                '               <label>Constant:</label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_constant" value="' + room.content.node[i].light.type.point.attenuation.manual.constant + '"><br>' +
-                '               <label>Linear: </label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_linear" value="' + room.content.node[i].light.type.point.attenuation.manual.linear + '"><br>' +
-                '               <label>Quadratic: </label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_quadratic" value="' + room.content.node[i].light.type.point.attenuation.manual.quadratic + '"><br> ' +
-                '           </div>' +
-                '       </div>' +
-                '   </div>' +
-                '   <div class="fifth ' + dHidden + '" id="room_content_node' + i + '_light_type_directional">' +
-                '       <label>Direction: </label>' +
-                '           <div class="fifth">' +
-                '               <label>x:</label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_x" value="' + room.content.node[i].light.type.directional.direction.x + '"><br>' +
-                '               <label>y: </label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_y" value="' + room.content.node[i].light.type.directional.direction.y + '"><br>' +
-                '               <label>z: </label>' +
-                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_z" value="' + room.content.node[i].light.type.directional.direction.z + '"><br> ' +
-                '           </div>' +
-                '       </div>' +
-                '   </div>' +
-                '     <div class="fifth ' + sHidden + '" id="room_content_node' + i + '_light_type_spot">' +
+                $('#content_node' + i).append(
+                '<div class="second">' +
+                '      <label>Spot:</label> '+
+                '     <div class="third" id="room_content_node' + i + '_light_type_spot">' +
                 '       <label>Range:</label>' +
-                '       <div class="fifth">' +
+                '       <div class="fourth">' +
                 '           <label>Inner: </label>' +
                 '           <input class="nums" type="number" id="room_content_node' + i + '_light_type_spot_range_inner" value="' + room.content.node[i].light.type.spot.range.inner + '"><br>' +
                 '           <label>Outer: </label>' +
@@ -761,7 +544,7 @@ function ContentCreation() {
                 '           <input class="nums" type="number" id="room_content_node' + i + '_light_type_spot_range_falloff" value="' + room.content.node[i].light.type.spot.range.falloff + '"><br>' +
                 '       </div>' +
                 '       <label>Attenuation: </label>' +
-                '       <div class="fifth">' +
+                '       <div class="fourth">' +
                 '           <label>Range:</label>' +
                 '           <input class="nums" type="number" id="room_content_node' + i + '_light_type_spot_attenuation_range" value="' + room.content.node[i].light.type.spot.attenuation.range + '"><br>' +
                 '           <label>Manual: </label>' +
@@ -775,7 +558,7 @@ function ContentCreation() {
                 '           </div>' +
                 '       </div>' +
                 '       <label>Direction: </label>' +
-                '           <div class="fifth">' +
+                '           <div class="fourth">' +
                 '               <label>x:</label>' +
                 '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_spot_direction_x" value="' + room.content.node[i].light.type.spot.direction.x + '"><br>' +
                 '               <label>y: </label>' +
@@ -787,6 +570,50 @@ function ContentCreation() {
                 '   </div>' +
                 '</div>'
             );
+            }
+            else if (room.lightType[p] == 'point') {
+               $('#content_node' + i).append(
+                '<div class="second">' +
+                '      <label>Point:</label> '+
+                '   <div class="third" id="room_content_node' + i + '_light_type_point">' +
+                '       <label>Attenuation: </label>' +
+                '       <div class="fourth">' +
+                '           <label>Range:</label>' +
+                '           <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_range" value="' + room.content.node[i].light.type.point.attenuation.range + '"><br>' +
+                '           <label>Manual: </label>' +
+                '           <div class="fifth">' +
+                '               <label>Constant:</label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_constant" value="' + room.content.node[i].light.type.point.attenuation.manual.constant + '"><br>' +
+                '               <label>Linear: </label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_linear" value="' + room.content.node[i].light.type.point.attenuation.manual.linear + '"><br>' +
+                '               <label>Quadratic: </label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_point_attenuation_manual_quadratic" value="' + room.content.node[i].light.type.point.attenuation.manual.quadratic + '"><br> ' +
+                '           </div>' +
+                '       </div>' +
+                '   </div>'+
+                '</div>'
+                );
+            }
+            else if (room.lightType[p] == 'directional') {
+                $('#content_node' + i).append(
+                '<div class="second">' +
+                '      <label>Directional:</label> '+
+                '   <div class="third" id="room_content_node' + i + '_light_type_directional">' +
+                '       <label>Direction: </label>' +
+                '           <div class="fourth">' +
+                '               <label>x:</label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_x" value="' + room.content.node[i].light.type.directional.direction.x + '"><br>' +
+                '               <label>y: </label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_y" value="' + room.content.node[i].light.type.directional.direction.y + '"><br>' +
+                '               <label>z: </label>' +
+                '               <input class="nums" type="number" id="room_content_node' + i + '_light_type_directional_direction_z" value="' + room.content.node[i].light.type.directional.direction.z + '"><br> ' +
+                '           </div>' +
+                '       </div>' +
+                '   </div>' +
+                '</div>'
+                );
+            }
+            ++p;
         }
         else if (room.nodeTypes[i] == "browser") {
             $('#content_node' + i).append(
