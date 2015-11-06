@@ -1,19 +1,14 @@
-﻿
+﻿<div id="settings-plane">
     <header>
         <p>On this page, you can modify your room properties. You can select each tag you would like to, and change it's value. After you finish, you need to click on "Generate and Download Room File" button to get your room file.</p>
     </header>
     <div>
-        <div class="plane">
-            <p class="centered"> Select the property you would like to change</p>
+        <div class="plane col-lg-6">
+            <p class="centeredLeft">Select the property you would like to change</p>
             <div id="jstree"></div>
-
         </div>
-
-        <div class="plane">
-
-            <p class="centered">
-                The Selected Property
-            </p>
+        <div class="plane col-lg-6">
+            <p class="centeredRight">The Selected Property</p>
             <div class="settings-zone">
                 <!--FIRST-->
                 <div id="RN" class="first hidden">
@@ -114,9 +109,7 @@
                                 <input class="nums" type="number" step="0.001"  id="environment_fog_linearStop" value=""><br>
                                 <label>Exp Density:</label>
                                 <input class="nums" type="number" step="0.001"  id="environment_fog_expDensity" value=""><br>
-
                             </div>
-
                         </div>
                     </div>
                     <!--FIRST-->
@@ -147,7 +140,6 @@
                                 <input class="nums" type="number" step="0.001" id="camera_pointer_offset_z"><br>
                             </div>
                         </div>
-
                     </div>
                     <!--FIRST-->
                     <div class="first hidden" id="boundaries">
@@ -175,7 +167,6 @@
                                 <input class="nums" type="number" step="0.001" id="boundaries_zLimit_max"><br>
                             </div>
                         </div>
-
                     </div>
                     <!--FIRST-->
                     <div class="first hidden" id="camera">
@@ -196,16 +187,16 @@
                                 <label>Orientation:</label>
                                 <div class="fourth">
                                     <label>Quaternion:</label>
-                                        <div id="camera_quaternion">
-                                            <label>x: </label>
-                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qx"><br>
-                                            <label>y: </label>
-                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qy"><br>
-                                            <label>z: </label>
-                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qz"><br>
-                                            <label>w: </label>
-                                            <input class="nums" step="0.001" type="number" id="camera_pose_orientation_qw"><br> 
-                                        </div>
+									<div id="camera_quaternion">
+										<label>x: </label>
+										<input class="nums" step="0.001" type="number" id="camera_pose_orientation_qx"><br>
+										<label>y: </label>
+										<input class="nums" step="0.001" type="number" id="camera_pose_orientation_qy"><br>
+										<label>z: </label>
+										<input class="nums" step="0.001" type="number" id="camera_pose_orientation_qz"><br>
+										<label>w: </label>
+										<input class="nums" step="0.001" type="number" id="camera_pose_orientation_qw"><br> 
+									</div>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +213,6 @@
                             <label>Fov:</label>
                             <input class="nums" step="0.001" type="number" id="camera_fov">
                         </div>
-
                     </div>
                     <!--FIRST-->
                     <div class="first hidden" id="browserStartPage">
@@ -247,16 +237,13 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="first hidden" id="content">
-                </div>
-
+                <div class="first hidden" id="content"></div>
             </div>
-
         </div>
     </div>
     <footer>
         <div id="dNd-buttons">
-            <a class="btn btn-default page-scroll" id="settings_submit">Generate and Download Room File</a>
+            <a class="btn btn-success page-scroll" id="settings_submit">Download Room File</a>
         </div>
     </footer>
+</div>

@@ -40,6 +40,20 @@ server.route([{
     },
     {
         method: 'GET',
+        path: '/scene-logo.png',
+        handler: {
+            file: 'scene-logo.png'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/scfg-logo.png',
+        handler: {
+            file: 'scfg-logo.png'
+        }
+    },		
+    {
+        method: 'GET',
         path: '/js/jquery.js',
         handler: {
             file: 'js/jquery.js'
@@ -82,6 +96,13 @@ server.route([{
     },
     {
         method: 'GET',
+        path: '/js/bootstrap-switch.js',
+        handler: {
+            file: 'js/bootstrap-switch.js'
+        }
+    },	
+    {
+        method: 'GET',
         path: '/settings.html',
         handler: {
             file: 'settings.html'
@@ -117,18 +138,25 @@ server.route([{
     },
     {
         method: 'GET',
-        path: '/styles.css',
+        path: '/css/styles.css',
         handler: {
             file: 'css/styles.css'
         }
     },
     {
         method: 'GET',
-        path: '/settingsStyle.css',
+        path: '/css/settingsStyle.css',
         handler: {
             file: 'css/settingsStyle.css'
         }
     },
+    {
+        method: 'GET',
+        path: '/css/bootstrap-switch.css',
+        handler: {
+            file: 'css/bootstrap-switch.css'
+        }
+    },	
     {
         method: 'GET',
         path: '/css/jstree/dist/themes/default/style.css',
