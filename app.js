@@ -33,23 +33,37 @@ server.route([{
     },
     {
         method: 'GET',
-        path: '/vircalogo.png',
+        path: '/images/szechenyi_2020_logo_fekvo_color_gradient_CMYK.jpg',
         handler: {
-            file: 'vircalogo.png'
+            file: 'images/szechenyi_2020_logo_fekvo_color_gradient_CMYK.jpg'
+        }
+    },	
+    {
+        method: 'GET',
+        path: '/images/infoblokk_kedv_final_felso_cmyk_ESZA.jpg',
+        handler: {
+            file: 'images/infoblokk_kedv_final_felso_cmyk_ESZA.jpg'
+        }
+    },	
+    {
+        method: 'GET',
+        path: '/images/vircalogo.png',
+        handler: {
+            file: 'images/vircalogo.png'
         }
     },
     {
         method: 'GET',
-        path: '/scene-logo.png',
+        path: '/images/scene-logo.png',
         handler: {
-            file: 'scene-logo.png'
+            file: 'images/scene-logo.png'
         }
     },
     {
         method: 'GET',
-        path: '/scfg-logo.png',
+        path: '/images/scfg-logo.png',
         handler: {
-            file: 'scfg-logo.png'
+            file: 'images/scfg-logo.png'
         }
     },		
     {

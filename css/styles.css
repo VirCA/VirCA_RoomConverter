@@ -19,14 +19,14 @@ footer{
 }
 
 #left {
-	background: url("../scene-logo.png") no-repeat center center;
+	background: url("../images/scene-logo.png") no-repeat center center;
 	box-shadow: 0 0 10px 0 #888888;
 	border-radius: 25px;
 	line-height: 310px;
 }
 
 #right {
-	background: url("../scfg-logo.png") no-repeat center center;
+	background: url("../images/scfg-logo.png") no-repeat center center;
 	box-shadow: 0 0 10px 0 #888888;
 	border-radius: 25px;
 	line-height: 310px;
